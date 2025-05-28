@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圖書管理系統</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+              <div class="container-fluid">
+                        <a class="navbar-brand" href="#" id="home-link">圖書管理系統</a>
+                        <form class="d-flex" id="search-form">
+                                <input class="form-control me-2" type="search" placeholder="搜尋圖書" aria-label="Search">
+                                <button class="btn btn-outline-light" type="submit">搜尋</button>
+                            </form>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                                <ul class="navbar-nav ms-auto">
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="#login" id="login-link">登錄</a>
+                                            </li>
+                                        <li class="nav-item">
+                                                <a class="nav-link" href="#register" id="register-link">註冊</a>
+                                            </li>
+                                        <li class="nav-item d-none" id="logout-link">
+                                                <a class="nav-link" href="#" id="logout">登出</a>
+                                            </li>
+                                    </ul>
+                            </div>
+                    </div>
+            </nav>
+    <div class="container">
+        <!-- Category Selection Page -->
+        <section id="categories" class="text-center">
+            <h1 class="mb-4">查詢圖書</h1>
+            <div class="row justify-content-center">
+                <div class="col-6">
+                    <input type="text" class="form-control mb-3" placeholder="查詢全部範圍" id="category-search">
+                </div>
+            </div>
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                <div class="col"><button class="btn category-btn" data-category="總類">總類</button></div>
+                <div class="col"><button class="btn category-btn" data-category="哲學宗教">哲學宗教</button></div>
+                <div class="col"><button class="btn category-btn" data-category="科學技術">科學技術</button></div>
+                <div class="col"><button class="btn category-btn" data-category="應用科學">應用科學</button></div>
+                <div class="col"><button class="btn category-btn" data-category="社會科學">社會科學</button></div>
+                <div class="col"><button class="btn category-btn" data-category="自然科學">自然科學</button></div>
+                <div class="col"><button class="btn category-btn" data-category="總類(總類)">總類(總類)</button></div>
+                <div class="col"><button class="btn category-btn" data-category="法律">法律</button></div>
+                <div class="col"><button class="btn category-btn" data-category="教育">教育</button></div>
+                <div class="col"><button class="btn category-btn" data-category="藝術">藝術</button></div>
+                <div class="col"><button class="btn category-btn" data-category="語言文字">語言文字</button></div>
+                <div class="col"><button class="btn category-btn" data-category="文學">文學</button></div>
+                <div class="col"><button class="btn category-btn" data-category="歷史">歷史</button></div>
+            </div>
+            <div class="mt-4">
+                <button class="btn btn-primary" id="view-books">查看圖書</button>
+            </div>
+        </section>
+
+        <!-- Login Section -->
+        <section id="login" class="d-none">
+            <h1 class="mb-4">登錄</h1>
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="login-username" class="form-label">用戶名</label>
+                    <input type="text" class="form-control" id="login-username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="login-password" class="form-label">密碼</label>
+                    <input type="password" class="form-control" id="login-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">登錄</button>
+            </form>
+            <p class="mt-3">還沒有帳號？<a href="#register">點擊這裡註冊</a></p>
+        </section>
+
+        <!-- Register Section -->
+        <section id="register" class="d-none">
+            <h1 class="mb-4">註冊</h1>
+            <form id="register-form">
+                <div class="mb-3">
+                    <label for="register-username" class="form-label">用戶名</label>
+                    <input type="text" class="form-control" id="register-username" name="username" required>
+                </div>
+                <div class="mb-3">
+                    <label for="register-password" class="form-label">密碼</label>
+                    <input type="password" class="form-control" id="register-password" name="password" required>
+                </div>
+                <button type="submit" class="btn btn-primary">註冊</button>
+            </form>
+            <p class="mt-3">已有帳號？<a href="#login">點擊這裡登錄</a></p>
+        </section>
+
+        <!-- Book List Section -->
+        <section id="book-list" class="d-none">
+            <h1 class="mb-4">圖書列表</h1>
+            <div class="mb-3">
+                <button class="btn btn-primary" id="add-book-btn">添加圖書</button>
+            </div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>書名</th>
+                        <th>作者</th>
+                        <th>出版年份</th>
+                        <th>類別</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody id="book-table">
+                    <!-- Sample book data -->
+                    <tr>
+                        <td>示例書名</td>
+                        <td>示例作者</td>
+                        <td>2020</td>
+                        <td>文學</td>
+                        <td>
+                            <a href="#edit-book" class="btn btn-sm btn-primary edit-book-btn" data-id="1"
+                                data-title="示例書名" data-author="示例作者" data-year="2020" data-category="文學">編輯</a>
+                            <button class="btn btn-sm btn-danger delete-book-btn" data-id="1">刪除</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- Add Book Section -->
+        <section id="add-book" class="d-none">
+            <h1 class="mb-4">添加圖書</h1>
+            <form id="add-book-form">
+                <div class="mb-3">
+                    <label for="add-title" class="form-label">書名</label>
+                    <input type="text" class="form-control" id="add-title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-author" class="form-label">作者</label>
+                    <input type="text" class="form-control" id="add-author" name="author" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-year" class="form-label">出版年份</label>
+                    <input type="number" class="form-control" id="add-year" name="year" required>
+                </div>
+                <div class="mb-3">
+                    <label for="add-category" class="form-label">類別</label>
+                    <select class="form-control" id="add-category" name="category" required>
+                        <option value="總類">總類</option>
+                        <option value="哲學宗教">哲學宗教</option>
+                        <option value="科學技術">科學技術</option>
+                        <option value="應用科學">應用科學</option>
+                        <option value="社會科學">社會科學</option>
+                        <option value="自然科學">自然科學</option>
+                        <option value="總類(總類)">總類(總類)</option>
+                        <option value="法律">法律</option>
+                        <option value="教育">教育</option>
+                        <option value="藝術">藝術</option>
+                        <option value="語言文字">語言文字</option>
+                        <option value="文學">文學</option>
+                        <option value="歷史">歷史</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">添加</button>
+            </form>
+        </section>
+
+        <!-- Edit Book Section -->
+        <section id="edit-book" class="d-none">
+            <h1 class="mb-4">編輯圖書</h1>
+            <form id="edit-book-form">
+                <input type="hidden" id="edit-id" name="id">
+                <div class="mb-3">
+                    <label for="edit-title" class="form-label">書名</label>
+                    <input type="text" class="form-control" id="edit-title" name="title" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-author" class="form-label">作者</label>
+                    <input type="text" class="form-control" id="edit-author" name="author" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-year" class="form-label">出版年份</label>
+                    <input type="number" class="form-control" id="edit-year" name="year" required>
+                </div>
+                <div class="mb-3">
+                    <label for="edit-category" class="form-label">類別</label>
+                    <select class="form-control" id="edit-category" name="category" required>
+                        <option value="總類">總類</option>
+                        <option value="哲學宗教">哲學宗教</option>
+                        <option value="科學技術">科學技術</option>
+                        <option value="應用科學">應用科學</option>
+                        <option value="社會科學">社會科學</option>
+                        <option value="自然科學">自然科學</option>
+                        <option value="總類(總類)">總類(總類)</option>
+                        <option value="法律">法律</option>
+                        <option value="教育">教育</option>
+                        <option value="藝術">藝術</option>
+                        <option value="語言文字">語言文字</option>
+                        <option value="文學">文學</option>
+                        <option value="歷史">歷史</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">更新</button>
+                <a href="#book-list" class="btn btn-secondary">取消</a>
+            </form>
+        </section>
+
+        <!-- Alert messages (simulated) -->
+        <div class="alert alert-success alert-dismissible fade show d-none" role="alert" id="alert-success">
+            操作成功！
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+        <div class="alert alert-danger alert-dismissible fade show d-none" role="alert" id="alert-error">
+            操作失敗！請先登錄。
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

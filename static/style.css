@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&family=Poppins:wght@400;600&display=swap');
+
+body {
+  font-family: 'Noto Sans TC', 'Poppins', Arial, sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.6;
+  letter-spacing: 0.3px;
+}
+
+header {
+  background: linear-gradient(45deg, #2c3e50, #3498db);
+  color: white;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+nav {
+  margin-top: 1rem;
+  position: relative;
+}
+
+nav a {
+  margin: 0 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 30px;
+  transition: all 0.3s ease, transform 0.3s ease, color 0.3s ease;
+}
+
+nav a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: scale(1.05) translateY(-2px);
+  color: #fff;
+}
+
+nav a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  transition: all 0.3s;
+}
+
+nav a:hover::after {
+  width: 70%;
+  left: 15%;
+}
+
+main {
+  flex: 1;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 2rem auto;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h2 {
+  color: #2c3e50;
+  border-left: 5px solid #3498db;
+  padding-left: 1rem;
+  margin: 2rem 0;
+}
+
+ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  padding: 0;
+}
+
+.achievements-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+  background: #f8f9fa;
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+li:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);
+}
+
+li a {
+  color: #3498db;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+li a::before {
+  content: '➤';
+  color: #e74c3c;
+  transition: transform 0.3s ease;
+}
+
+li a:hover::before {
+  transform: translateX(5px);
+}
+
+footer {
+  background-color: #1a2526; /* 深色背景，類似圖片 */
+  color: #ffffff;
+  padding: 1.5rem 0.5rem; /* 縮小內邊距 */
+  font-family: Arial, sans-serif;
+}
+
+.footer-container {
+  display: flex; /* 使用 flexbox */
+  flex-wrap: wrap; /* 允許換行 */
+  justify-content: space-between; /* 欄之間均勻分佈 */
+  max-width: 1000px; /* 縮小最大寬度 */
+  margin: 0 auto;
+}
+
+.footer-column {
+  flex: 1 1 45%; /* 每欄佔據約 45% 寬度，實現兩欄一行 */
+  min-width: 150px; /* 縮小最小寬度 */
+  margin-bottom: 0.8rem; /* 縮小垂直間距 */
+}
+
+.footer-column h3 {
+  font-size: 1rem; /* 縮小標題字體 */
+  margin-bottom: 0.8rem; /* 縮小標題下間距 */
+  color: #ffffff;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 0.3rem; /* 縮小列表項間距 */
+}
+
+.footer-column a, .footer-column li {
+  color: #b0b0b0;
+  font-size: 0.8rem; /* 縮小文字大小 */
+  line-height: 1.4; /* 縮小行高 */
+  text-decoration: none;
+}
+
+.footer-column a:hover {
+  color: #ffffff;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 1.5rem; /* 縮小上邊距 */
+  border-top: 1px solid #333;
+  padding-top: 0.8rem; /* 縮小內邊距 */
+  font-size: 0.7rem; /* 縮小版權文字 */
+  color: #b0b0b0;
+}
+
+/* 漢堡選單樣式 */
+.hamburger {
+  display: none;
+  position: absolute;
+  right: 1rem;
+  top: 1.5rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: white;
+}
+
+@media (max-width: 768px) {
+  nav {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: rgba(44, 62, 80, 0.98);
+    padding: 1rem;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+
+  nav.active {
+    display: flex;
+  }
+
+  nav a {
+    margin: 0.5rem 0;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .hamburger {
+    display: block;
+  }
+
+  main {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+
+
+}

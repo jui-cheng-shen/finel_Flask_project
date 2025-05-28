@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>心情版 Blog</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div class="container">
+
+        <!-- 登入註冊區 -->
+        <div id="authSection">
+            <h2>登入 / 註冊</h2>
+            <form id="authForm">
+                <input type="text" id="username" placeholder="使用者名稱" required />
+                <input type="password" id="password" placeholder="密碼" required />
+                <button type="submit">登入 / 註冊</button>
+            </form>
+            <p id="authMsg"></p>
+        </div>
+
+        <!-- 心情貼文區 -->
+        <div id="blogSection" style="display:none;">
+            <button id="logoutBtn">登出</button>
+            <h1>📝 我的心情版</h1>
+
+            <form id="moodForm">
+                <input type="text" id="title" placeholder="心情標題" required />
+                <textarea id="content" placeholder="輸入今天的心情..." required></textarea>
+                <select id="tag">
+                    <option value="快樂">😀 快樂</option>
+                    <option value="憂鬱">😢 憂鬱</option>
+                    <option value="生氣">😠 生氣</option>
+                    <option value="平靜">😌 平靜</option>
+                </select>
+                <input type="file" id="imageInput" accept="image/*" />
+                <button type="submit">發佈</button>
+            </form>
+
+            <div id="postList"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

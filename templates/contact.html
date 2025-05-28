@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+
+{% block title %}聯絡我{% endblock %}
+
+{% block content %}
+<div class="contact-container">
+  <h2>聯絡我</h2>
+
+  <!-- 簡短介紹 -->
+  <div class="intro">
+    <p>歡迎聯繫我！我是沈睿晟，一位熱愛攝影與技術的創作者。無論是合作機會還是簡單的問候，我都很樂意與您交流。</p>
+  </div>
+
+  <!-- 聯絡資訊 -->
+  <div class="contact-info">
+    <p><i class="fas fa-envelope"></i> Email：shenjuicheng@gmail.com</p>
+    <p><i class="fas fa-phone"></i> 電話: 0928-270-227</p>
+  </div>
+
+  <!-- 聯絡表單 -->
+  <form class="contact-form" action="{{ url_for('send_message') }}" method="POST">
+    <div class="form-group">
+      <label for="name">姓名：</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+      <label for="email">電子郵件：</label>
+      <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+      <label for="message">訊息：</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    <button type="submit">送出</button>
+  </form>
+
+  <!-- 社交媒體連結 -->
+  <div class="social-links">
+    <p>追蹤我：</p>
+    <a href="https://www.facebook.com/chen.rui.cheng.157174" target="_blank">facebook<i class="fab fa-facebook"></i></a>
+    <a href="https://www.instagram.com/photography.jcsw/?next=%2Fshen_jui_cheng%2F" target="_blank">instagram<i class="fab fa-instagram"></i></a>
+  </div>
+
+</div>
+
+<style>
+/* 全域字體與背景設定 */
+body {
+  font-family: 'Helvetica Neue', 'Segoe UI', sans-serif;
+  background-color: #f4f7fa;
+  color: #2c3e50;
+  line-height: 1.6;
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #3498db;
+  margin-bottom: 1.5rem;
+}
+
+.intro {
+  text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  padding: 0 1rem;
+}
+
+.contact-info {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.contact-info p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.contact-info i {
+  margin-right: 0.5rem;
+  color: #3498db;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  color: #34495e;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 0.7rem 1rem;
+  border: 1px solid #dce1e7;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.15);
+  outline: none;
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+button {
+  align-self: center;
+  padding: 0.8rem 2rem;
+  background: #3498db;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+  background: #2980b9;
+  transform: scale(1.03);
+}
+
+.social-links {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.social-links p {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.social-links a {
+  margin: 0 1rem;
+  color: #3498db;
+  font-size: 1.6rem;
+  text-decoration: none;
+  transition: color 0.3s ease, transform 0.2s ease;
+}
+
+.social-links a:hover {
+  color: #2980b9;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .contact-container {
+    margin: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  .social-links a {
+    font-size: 1.4rem;
+  }
+
+  button {
+    width: 100%;
+  }
+}
+</style>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 假設後端處理表單提交
+  const form = document.querySelector('.contact-form');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // 這裡應添加後端 API 調用，例如 fetch
+      console.log('表單提交:', {
+        name: form.name.value,
+        email: form.email.value,
+        message: form.message.value
+      });
+      alert('訊息已送出！感謝您的聯繫。');
+      form.reset();
+    });
+  }
+});
+</script>
+{% endblock %}

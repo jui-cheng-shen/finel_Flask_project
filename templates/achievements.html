@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}成果展示{% endblock %}
+
+{% block content %}
+
+<h2>成果展示</h2>
+<p>這裡是我的一些專案和成就。</p>
+
+<ul class="achievements-list">
+    <li><a href="{{ url_for('static', filename='waterpuzzle//index.html') }}" target="_blank">專案1：Water Puzzle</a></li>
+    <li><a href="{{ url_for('static', filename='library/index.html') }}" target="_blank">專案2：圖書管理系統</a></li>
+    <li><a href="{{ url_for('static', filename='bookkeeping/index.html') }}" target="_blank">專案3:記帳軟體</a></li>
+    <li><a href="{{ url_for('static', filename='calculator/index.html') }}" target="_blank">專案4:計算機</a></li>
+    <li><a href="{{ url_for('static', filename='mood_blog/index.html') }}" target="_blank">專案5:心情版</a></li>
+</ul>
+{% endblock %}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyCalculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="my-calculator">
+        <!-- MyErrorMessage -->
+        <div class="my-calculator-error" id="error-message"></div>
+        <!-- MyDisplay -->
+        <div class="my-calculator-display">
+            <div class="expression" id="expression"></div>
+            <div class="result" id="result">0</div>
+        </div>
+        <!-- MyKeypad -->
+        <div class="my-calculator-keypad">
+            <button class="my-calculator-btn control" onclick="handleButtonClick('C')">C</button>
+            <button class="my-calculator-btn control" onclick="handleButtonClick('DEL')">DEL</button>
+            <button class="my-calculator-btn operator" onclick="handleButtonClick('%')">%</button>
+            <button class="my-calculator-btn operator" onclick="handleButtonClick('/')">÷</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('7')">7</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('8')">8</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('9')">9</button>
+            <button class="my-calculator-btn operator" onclick="handleButtonClick('*')">×</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('4')">4</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('5')">5</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('6')">6</button>
+            <button class="my-calculator-btn operator" onclick="handleButtonClick('-')">-</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('1')">1</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('2')">2</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('3')">3</button>
+            <button class="my-calculator-btn operator" onclick="handleButtonClick('+')">+</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('0')"
+                style="grid-column: span 2;">0</button>
+            <button class="my-calculator-btn number" onclick="handleButtonClick('.')">.</button>
+            <button class="my-calculator-btn operator" onclick="handleButtonClick('=')">=</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

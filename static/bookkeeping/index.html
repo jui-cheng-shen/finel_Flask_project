@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>財務管家Pro</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>財務管家Pro</h1>
+            <nav id="auth-nav">
+                <button id="login-btn-nav" class="btn btn-primary">登入</button>
+                <button id="register-btn-nav" class="btn btn-secondary">註冊</button>
+                <button id="logout-btn-nav" class="btn btn-warning hidden">登出</button>
+            </nav>
+        </div>
+    </header>
+
+    <div id="auth-section" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" aria-label="關閉彈窗">×</span>
+            <div id="login-form-container">
+                <h2>會員登入</h2>
+                <form id="login-form">
+                    <div class="form-group">
+                        <label for="login-email">電子郵件:</label>
+                        <input type="email" id="login-email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">密碼:</label>
+                        <input type="password" id="login-password" required autocomplete="current-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">登入</button>
+                    <p class="form-switch-link"><a href="#" id="show-register-form">還沒有帳戶嗎? 點此註冊</a></p>
+                </form>
+            </div>
+            <div id="register-form-container" class="hidden">
+                <h2>註冊新帳戶</h2>
+                <form id="register-form">
+                    <div class="form-group">
+                        <label for="register-email">電子郵件:</label>
+                        <input type="email" id="register-email" required autocomplete="email">
+                    </div>
+                    <div class="form-group">
+                        <label for="register-password">密碼:</label>
+                        <input type="password" id="register-password" required autocomplete="new-password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">註冊</button>
+                    <p class="form-switch-link"><a href="#" id="show-login-form">已經有帳戶了? 點此登入</a></p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" class="hidden">
+        <div class="container main-layout">
+            <aside id="sidebar">
+                <h2>選單</h2>
+                <nav>
+                    <ul>
+                        <li><a href="#" data-section="dashboard" class="active"><i class="fas fa-chart-line"></i> 總覽</a></li>
+                        <li><a href="#" data-section="transactions"><i class="fas fa-exchange-alt"></i> 交易紀錄</a></li>
+                        <li><a href="#" data-section="categories"><i class="fas fa-tags"></i> 分類管理</a></li>
+                        <li><a href="#" data-section="payment-methods"><i class="fas fa-wallet"></i> 付款方式</a></li>
+                        <li><a href="#" data-section="budget"><i class="fas fa-money-check-alt"></i> 預算管理</a></li>
+                    </ul>
+                </nav>
+                <div class="user-profile">
+                    目前登入: <strong id="user-email-display"></strong>
+                </div>
+            </aside>
+            <section id="content-area">
+                <div id="dashboard-section" class="content-section">
+                    <h2>財務總覽</h2>
+                    <div class="dashboard-summaries">
+                        <div class="summary-card income">
+                            <h4>總收入</h4>
+                            <p id="total-income">NT$0</p>
+                        </div>
+                        <div class="summary-card expense">
+                            <h4>總支出</h4>
+                            <p id="total-expenses">NT$0</p>
+                        </div>
+                        <div class="summary-card balance">
+                            <h4>目前結餘</h4>
+                            <p id="net-balance">NT$0</p>
+                        </div>
+                        <div class="summary-card monthly-balance">
+                            <h4>本月結餘</h4>
+                            <p id="monthly-net-balance">NT$0</p>
+                        </div>
+                    </div>
+                    <div class="chart-container card">
+                        <h3>支出分佈圖</h3>
+                        <div class="chart-placeholder">財務圖表將顯示於此處。</div>
+                        <canvas id="spendingChart" class="hidden"></canvas>
+                    </div>
+                </div>
+
+                <div id="transactions-section" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>交易紀錄</h2>
+                        <button id="add-transaction-btn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> 新增交易</button>
+                    </div>
+                    <div class="filters card">
+                        <label for="filter-transaction-type" class="sr-only">篩選交易類型</label>
+                        <select id="filter-transaction-type">
+                            <option value="">所有類型</option>
+                            <option value="income">收入</option>
+                            <option value="expense">支出</option>
+                        </select>
+                        <label for="filter-payment-method" class="sr-only">篩選付款方式</label>
+                        <select id="filter-payment-method">
+                            <option value="">所有付款方式</option>
+                            </select>
+                        <label for="filter-category" class="sr-only">篩選分類</label>
+                        <select id="filter-category">
+                            <option value="">所有分類</option>
+                            </select>
+                        <div class="date-filters">
+                            <label for="filter-start-date" class="sr-only">開始日期</label>
+                            <input type="text" id="filter-start-date" placeholder="開始日期" class="flatpickr-input">
+                            <label for="filter-end-date" class="sr-only">結束日期</label>
+                            <input type="text" id="filter-end-date" placeholder="結束日期" class="flatpickr-input">
+                            <button id="clear-date-filter" class="btn btn-secondary btn-icon-only" title="清除日期篩選"><i class="fas fa-calendar-times"></i></button>
+                        </div>
+                        <label for="search-transactions" class="sr-only">搜尋交易</label>
+                        <input type="text" id="search-transactions" placeholder="搜尋交易 (關鍵字、金額、日期)...">
+                    </div>
+                    <div id="transactions-list" class="card-list">
+                        <p class="list-placeholder">尚無任何交易紀錄。</p>
+                    </div>
+                </div>
+
+                <div id="categories-section" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>分類管理</h2>
+                        <button id="add-category-btn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> 新增分類</button>
+                    </div>
+                    <div id="categories-list" class="card-list">
+                        <p class="list-placeholder">尚未定義任何分類。</p>
+                    </div>
+                </div>
+
+                <div id="payment-methods-section" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>付款方式管理</h2>
+                        <button id="add-payment-method-btn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> 新增付款方式</button>
+                    </div>
+                    <div id="payment-methods-list" class="card-list">
+                        <p class="list-placeholder">尚未設定任何付款方式。</p>
+                    </div>
+                </div>
+
+                <div id="budget-section" class="content-section hidden">
+                    <div class="section-header">
+                        <h2>預算管理</h2>
+                        <button id="add-budget-btn" class="btn btn-primary"><i class="fas fa-plus-circle"></i> 設定新預算</button>
+                    </div>
+                    <div id="budgets-list" class="card-list">
+                        <p class="list-placeholder">尚未設定任何預算。</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <div id="transaction-form-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" aria-label="關閉彈窗">×</span>
+            <h3>新增/編輯 交易</h3>
+            <form id="transaction-form">
+                <input type="hidden" id="transaction-id">
+                <div class="form-group">
+                    <label for="transaction-type">類型:</label>
+                    <select id="transaction-type" required>
+                        <option value="expense">支出</option>
+                        <option value="income">收入</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-category">分類:</label>
+                    <select id="transaction-category" required>
+                        <option value="">選擇分類</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-payment-method">付款方式:</label>
+                    <select id="transaction-payment-method" required>
+                        <option value="">選擇付款方式</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-amount">金額:</label>
+                    <input type="number" id="transaction-amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-date">日期:</label>
+                    <input type="date" id="transaction-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-note">備註:</label>
+                    <textarea id="transaction-note" placeholder="新增備註..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="transaction-photo-file">單據照片:</label>
+                    <input type="file" id="transaction-photo-file" accept="image/*" class="hidden-file-input">
+                    <label for="transaction-photo-file" class="btn btn-secondary file-input-label">選擇照片</label>
+                    <input type="url" id="transaction-photo-url" placeholder="或輸入照片URL (選填)">
+                    <img id="photo-preview" class="photo-preview hidden" alt="照片預覽">
+                </div>
+                <button type="submit" class="btn btn-primary">儲存交易</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="category-form-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" aria-label="關閉彈窗">×</span>
+            <h3>新增/編輯 分類</h3>
+            <form id="category-form">
+                <input type="hidden" id="category-id">
+                <div class="form-group">
+                    <label for="category-name">名稱:</label>
+                    <input type="text" id="category-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="category-type">類型:</label>
+                    <select id="category-type" required>
+                        <option value="expense">支出</option>
+                        <option value="income">收入</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">儲存分類</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="payment-method-form-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" aria-label="關閉彈窗">×</span>
+            <h3>新增/編輯 付款方式</h3>
+            <form id="payment-method-form">
+                <input type="hidden" id="payment-method-id">
+                <div class="form-group">
+                    <label for="payment-method-name">名稱:</label>
+                    <input type="text" id="payment-method-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="payment-method-balance">初始餘額:</label>
+                    <input type="number" id="payment-method-balance" step="0.01" required>
+                </div>
+                <button type="submit" class="btn btn-primary">儲存付款方式</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="budget-form-modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" aria-label="關閉彈窗">×</span>
+            <h3>設定預算</h3>
+            <form id="budget-form">
+                <input type="hidden" id="budget-id">
+                <div class="form-group">
+                    <label for="budget-category">選擇分類:</label>
+                    <select id="budget-category" required>
+                        <option value="">選擇支出分類</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="budget-amount">預算金額:</label>
+                    <input type="number" id="budget-amount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="budget-month">選擇月份:</label>
+                    <input type="month" id="budget-month" required>
+                </div>
+                <button type="submit" class="btn btn-primary">儲存預算</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 財務管家Pro. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

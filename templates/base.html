@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}我的個人網站{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+  <header>
+    <h1>沈睿晟的網站</h1>
+    <nav>
+      <a href="/">🏠首頁</a>
+      <a href="/about">ℹ️關於我</a>
+      <a href="/contact">📞聯絡我</a>
+      <a href="/photos">🖼️攝影作品</a>
+      <a href="/achievements">🗂️成果展示</a>
+    </nav>
+
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="footer-column">
+        <h3>沈睿晟的網站</h3>
+        <p>這裡是沈睿晟的個人網站，分享攝影、成果展示等內容。</p>
+        <div class="social-icons">
+          <a href="#"><span>📷</span></a>
+          <a href="#"><span>🐦</span></a>
+          <a href="#"><span>📘</span></a>
+        </div>
+      </div>
+    <div class="footer-bottom">
+      <p>© 2025 沈睿晟的網站. 版權所有.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

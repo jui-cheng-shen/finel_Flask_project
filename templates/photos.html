@@ -1,0 +1,308 @@
+{% extends 'base.html' %}
+
+{% block title %}攝影作品{% endblock %}
+
+{% block content %}
+<div class="gallery-container">
+  <h2>瞬間永恆</h2>
+  
+  <!-- 幻燈片容器 -->
+  <div class="photo-frame">
+    <div class="slideshow">
+      {% for i in range(1, 11) %}
+      <div class="slide">
+        <img 
+          src="{{ url_for('static', filename='photos/' ~ i ~ '.jpg') }}" 
+          alt="攝影作品 {{ i }}"
+          loading="lazy"
+          data-index="{{ i }}"
+        >
+        <p class="caption">攝影作品 {{ i }} - 拍攝於 2025年</p>
+      </div>
+      {% endfor %}
+    </div>
+
+    <!-- 導航控制 -->
+    <button class="nav-btn prev" aria-label="上一張">❮</button>
+    <button class="nav-btn next" aria-label="下一張">❯</button>
+    
+    <!-- 分頁指示 -->
+    <div class="pagination"></div>
+  </div>
+
+  <!-- 縮圖導航 -->
+  <div class="thumbnail-nav">
+    {% for i in range(1, 10) %}
+    <div class="thumbnail" data-index="{{ i-1 }}">
+      <img 
+        src="{{ url_for('static', filename='photos/' ~ i ~ '.jpg') }}" 
+        alt="縮圖 {{ i }}"
+        loading="lazy"
+      >
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+/* 核心樣式 */
+.gallery-container {
+  max-width: 90vw; /* 增大寬度，減少留白 */
+  margin: 1rem auto; /* 減少上下邊距 */
+  padding: 1rem;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.photo-frame {
+  position: relative;
+  padding: 1.5rem; /* 減少內邊距 */
+  border-radius: 15px;
+}
+
+.slideshow {
+  position: relative;
+  overflow: hidden;
+  border: 15px solid #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 100%;
+  background: #f8f9fa; /* 輕微背景色 */
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  opacity: 0;
+  transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.slide img {
+  max-width: 100%;
+  max-height: 70vh; /* 降低最大高度，留出空間給縮圖 */
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.slide .caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: rgba(44, 66, 88, 0.8);
+  color: white;
+  padding: 0.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+/* 導航按鈕 */
+.nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(44, 66, 88, 0.6);
+  color: white;
+  border: none;
+  padding: 1rem 1.2rem;
+  cursor: pointer;
+  font-size: 1.8rem;
+  border-radius: 50%;
+  transition: background 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.nav-btn:hover {
+  background: rgba(44, 66, 88, 0.9);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.prev { left: 1.5rem; }
+.next { right: 1.5rem; }
+
+/* 分頁指示 */
+.pagination {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.8rem;
+  z-index: 2;
+}
+
+.pagination span {
+  width: 12px;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.pagination span.active {
+  background: #3498db;
+  transform: scale(1.3);
+}
+
+/* 縮圖導航 */
+.thumbnail-nav {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  width: 100px;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.thumbnail:hover {
+  transform: scale(1.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.thumbnail.active {
+  border: 2px solid #3498db;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+  .gallery-container {
+    max-width: 95vw;
+    margin: 0.5rem auto;
+    padding: 0.5rem;
+  }
+
+  .photo-frame {
+    padding: 1rem;
+  }
+
+  .slideshow {
+    border-width: 10px;
+  }
+
+  .slide img {
+    max-height: 50vh;
+  }
+
+  .nav-btn {
+    padding: 0.8rem;
+    font-size: 1.5rem;
+  }
+
+  .pagination {
+    bottom: 1rem;
+  }
+
+  .thumbnail {
+    width: 80px;
+    height: 48px;
+  }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const slides = document.querySelectorAll('.slide');
+  const pagination = document.querySelector('.pagination');
+  const slideshow = document.querySelector('.slideshow');
+  const thumbnails = document.querySelectorAll('.thumbnail');
+  let current = 0;
+
+  // 初始化分頁點
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.addEventListener('click', () => gotoSlide(i));
+    pagination.appendChild(dot);
+  });
+
+  // 縮圖點擊事件
+  thumbnails.forEach((thumbnail, i) => {
+    thumbnail.addEventListener('click', () => gotoSlide(i));
+  });
+
+  // 初始狀態
+  updateSlides();
+
+  // 導航事件
+  document.querySelector('.prev').addEventListener('click', () => gotoSlide(current - 1));
+  document.querySelector('.next').addEventListener('click', () => gotoSlide(current + 1));
+
+  // 自動播放
+  let autoplay = setInterval(() => gotoSlide(current + 1), 5000);
+
+  // 懸停暫停
+  slideshow.addEventListener('mouseenter', () => clearInterval(autoplay));
+  slideshow.addEventListener('mouseleave', () => {
+    autoplay = setInterval(() => gotoSlide(current + 1), 5000);
+  });
+
+  function gotoSlide(n) {
+    current = (n + slides.length) % slides.length;
+    updateSlides();
+  }
+
+  function updateSlides() {
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === current);
+    });
+    pagination.querySelectorAll('span').forEach((dot, i) => {
+      dot.classList.toggle('active', i === current);
+    });
+    thumbnails.forEach((thumbnail, i) => {
+      thumbnail.classList.toggle('active', i === current);
+    });
+
+    // 動態調整 slideshow 高度
+    const activeImg = slides[current].querySelector('img');
+    if (activeImg.complete) {
+      adjustHeight(activeImg);
+    } else {
+      activeImg.onload = () => adjustHeight(activeImg);
+    }
+  }
+
+  function adjustHeight(img) {
+    const naturalWidth = img.naturalWidth;
+    const naturalHeight = img.naturalHeight;
+    const aspectRatio = naturalWidth / naturalHeight;
+    const maxWidth = slideshow.offsetWidth;
+    const maxHeight = window.innerHeight * 0.7; // 70vh 作為最大高度限制
+
+    if (aspectRatio > 1) {
+      // 橫向照片
+      slideshow.style.height = `${maxWidth / aspectRatio}px`;
+    } else {
+      // 直向照片
+      slideshow.style.height = `${Math.min(maxHeight, maxWidth / aspectRatio)}px`;
+    }
+  }
+
+  // 初始調整
+  if (slides[current].querySelector('img').complete) {
+    adjustHeight(slides[current].querySelector('img'));
+  }
+});
+</script>
+{% endblock %}

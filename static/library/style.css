@@ -1,0 +1,76 @@
+body {
+    padding-top: 56px; /* Adjust for fixed navbar */
+    background-color: #f8f9fa; /* Light grey background */
+}
+
+.navbar-brand {
+    font-weight: bold;
+}
+
+.container {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+/* Section styling */
+section {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+}
+
+/* Category buttons */
+.category-btn {
+    width: 100%;
+    padding: 20px;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #343a40; /* Dark text */
+    background-color: #e9ecef; /* Light grey background */
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.category-btn:hover {
+    background-color: #dee2e6;
+    border-color: #ced4da;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.category-btn.active {
+    background-color: #007bff; /* Bootstrap primary blue */
+    color: white;
+    border-color: #007bff;
+    box-shadow: 0 4px 10px rgba(0, 123, 255, 0.2);
+}
+
+/* Form styling within sections */
+section form {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Table styling */
+.table {
+    margin-top: 20px;
+}
+
+/* Alert messages */
+.alert {
+    position: fixed;
+    top: 70px; /* Below the navbar */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1050; /* Ensure it's on top */
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+/* Utility classes for hiding sections (Bootstrap's d-none is good) */
+/* .d-none is already provided by Bootstrap and handles display: none !important; */
