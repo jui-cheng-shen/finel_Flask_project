@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>homework</title>
+    <style>
+        /* --- CSS Variables (Custom Properties) --- */
+        :root {
+            --primary-bg-color: antiquewhite;
+            --default-font-family: Arial, Helvetica, sans-serif;
+            --border-color: black;
+            --container-padding: 30px;
+            --cell-padding: 5px;
+            --h1-font-size: 30px;
+            --label-font-size: 20px;
+            --input-spacing: 10px; /* For spacing around form elements */
+        }
+
+        /* --- General Body Styles --- */
+        body {
+            font-family: var(--default-font-family);
+            /* Setting box-sizing globally is often a good practice */
+            /* box-sizing: border-box; */ /* Uncomment if you want this for all elements */
+        }
+
+        /* --- Main Container (#myid) --- */
+        #myid {
+            width: 50%;
+            background-color: var(--primary-bg-color);
+            padding: var(--container-padding); /* 內邊距 (Padding) */
+            margin-left: 0; /* Keeps the container aligned to the left */
+            text-align: center; /* Centers inline/inline-block children (like the table) */
+            box-sizing: border-box; /* Padding and border are included in the element's total width and height */
+        }
+
+        /* --- Typography --- */
+        h1 {
+            font-size: var(--h1-font-size);
+            font-weight: bold;
+            /* font-family is inherited from body or #myid */
+            text-align: left; /* Overrides #myid's text-align: center */
+            margin-top: 0; /* Removes default browser top margin */
+            margin-bottom: 0.67em; /* Default browser margin for h1, adjust as needed */
+        }
+
+        label {
+            font-size: var(--label-font-size);
+            /* font-family is inherited */
+            display: inline-block; /* Allows for margin */
+            margin-bottom: var(--input-spacing); /* Space below the label */
+        }
+
+        /* --- Table Styles --- */
+        table {
+            width: 100%; /* Makes the table fill the width of #myid */
+            border: 1px solid var(--border-color); /* Single border around the table */
+            border-collapse: collapse; /* Merges adjacent cell borders */
+            margin: 20px auto 0; /* Adds top margin and centers the table block within #myid */
+            table-layout: fixed; /* Cells have fixed width, content doesn't change it */
+            text-align: center; /* Centers text within table cells */
+        }
+
+        td {
+            border: 1px solid var(--border-color); /* Border for each cell */
+            padding: var(--cell-padding); /* Space between cell content and cell border */
+        }
+
+        /* --- Optional: Basic Form Element Styling --- */
+        #numberInput, button {
+            padding: 8px;
+            font-size: 1em; /* Relative to parent font size */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 5px; /* Spacing between input and button if they are inline */
+        }
+
+        button {
+            background-color: #f0f0f0; /* A light grey, less jarring than default */
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+    </style>
+    <script>
+        function myFunction() {
+            var number = document.getElementById("numberInput");
+            var myid = document.getElementById("myid");
+            var n = parseInt(number.value);
+            var str = "";
+
+            if (isNaN(n) || n <= 0) {
+                myid.innerHTML = "<h1></h1><label for='numberInput'></label>請輸入正整數！"; // Clear previous table
+                // To re-render the input field and button, you'd need to store their HTML or recreate them.
+                // For simplicity, this message will replace the whole content of #myid.
+                // A better UX might be to show the message in a separate element.
+                return;
+            }
+
+            // Reconstruct the input and button if they were part of #myid's innerHTML that gets replaced
+            // Or, better, have a dedicated <div> inside #myid for the table output.
+            // For this example, assuming the error message is temporary and replaces table.
+            // If you want to keep input/button, you need to ensure they are not overwritten
+            // or are re-added. The simplest is to have a dedicated output div for the table.
+
+            // Let's assume you have a structure like:
+            // <div id="myid">
+            //   <h1>九九乘法表</h1>
+            //   <label for="numberInput">輸入一個正整數:</label>
+            //   <input type="number" id="numberInput">
+            //   <button onclick="myFunction()">產生乘法表</button>
+            //   <div id="tableOutput"></div> // </div>
+            // Then you would do: document.getElementById("tableOutput").innerHTML = str;
+            // And error: document.getElementById("tableOutput").innerHTML = "請輸入正整數！";
+
+            str += "<table>";
+            for (var i = 1; i <= n; i++) {
+                str += "<tr>";
+                for (var j = 1; j <= n; j++) {
+                    str += "<td>" + i + " &times; " + j + " = " + (i * j) + "</td>";
+                }
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            myid.innerHTML = document.querySelector('h1').outerHTML + document.querySelector('label').outerHTML + document.getElementById('numberInput').outerHTML + document.querySelector('button').outerHTML + str;
+            // The above line is a quick fix to keep the form elements.
+            // A better approach is to have a separate container for the table output.
+            // e.g., a <div id="outputTable"></div> and then use:
+            // document.getElementById("outputTable").innerHTML = str;
+        }
+    </script>
+</head>
+<body>
+    <div id="myid">
+        <h1>九九乘法表</h1>
+        <label for="numberInput">輸入一個正整數:</label>
+        <input type="number" id="numberInput" name="numberInput">
+        <button onclick="myFunction()">產生乘法表</button>
+        </div>
+</body>
+</html>
