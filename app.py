@@ -35,8 +35,9 @@ def achievements():
 def photos():
     return render_template('photos.html')
 
-
-
+@app.route('/research')
+def research():
+    return render_template('research.html')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)

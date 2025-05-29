@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的自走車專案</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>我的自走車專案：用 Arduino 和藍牙打造遙控小車！</h1>
+    </header>
+
+    <main>
+        <article>
+            <p>大家好！今天想跟大家分享我近期投入許多心力完成的專題——一台基於 Arduino 和藍牙控制的自走車。這個專案的目標是打造一台操作簡單、成本低廉且能即時反應的遙控車，非常適合用於教學和實驗。</p>
+
+            <section id="background-motivation">
+                <h2>專案的起點：為什麼選擇 Arduino 和藍牙？</h2>
+                <p>市面上許多自走車產品功能強大，但往往價格較高，設定也比較複雜，有時還依賴 Wi-Fi 或物聯網技術，這對於短距離的即時操控來說，可能會有效能延遲或設定繁瑣的問題。</p>
+                <p>因此，我的動機是：</p>
+                <ul>
+                    <li><strong>簡化操作與降低成本</strong>：開發一個容易上手且經濟實惠的系統。</li>
+                    <li><strong>即時反應</strong>：藍牙技術成本低廉、設定簡單，非常適合短距離的即時控制需求。</li>
+                    <li><strong>學習與實踐</strong>：透過這個專案，我希望能更深入了解 Arduino 硬體控制、藍牙通訊，並應用 HTML、C++ 和 JavaScript 的知識來設計控制介面。</li>
+                </ul>
+                <p>最終的專案目標是實現一台具備基本避障功能的自走車。</p>
+            </section>
+
+            <section id="components-technology">
+                <h2>核心組件：我的自走車是如何打造的？</h2>
+                <p>這台自走車主要由以下幾個核心組件構成：</p>
+                <ul>
+                    <li><strong>控制核心</strong>：Arduino UNO 開發板，負責處理所有指令和控制。</li>
+                    <li><strong>馬達驅動</strong>：L298N 電機驅動模組，用來控制直流馬達的轉動，實現前進、後退和轉向。</li>
+                    <li><strong>動力來源</strong>：直流馬達 (DC Motors)。</li>
+                    <li><strong>感測能力</strong>：超聲波模組 (HC-SR04)，用於偵測前方障礙物，實現避障功能。</li>
+                    <li><strong>無線通訊</strong>：藍牙模組 (例如 HC-05 或 HC-06)，讓自走車可以接收來自手機或網頁的指令。</li>
+                    <li><strong>電力供應</strong>：最初嘗試使用乾電池，後來改用 18650 鋰電池搭配 LM2596S 可調降壓穩壓電源模組，以確保穩定的電力輸出。</li>
+                    <li><strong>車體結構</strong>：車輛底盤與輪子，承載所有電子元件。</li>
+                </ul>
+                <p>軟體方面，主要使用 Arduino IDE (C/C++) 來編寫控制程式。如果透過網頁控制，則會用到 Web Bluetooth API (JavaScript)。</p>
+            </section>
+
+            <section id="how-it-works">
+                <h2>系統運作流程</h2>
+                <p>自走車的運作流程大致如下：</p>
+                <ol>
+                    <li><strong>使用者下達指令</strong>：透過手機 App 或網頁介面發送控制指令（如前進、後退、左轉、右轉、停止）。</li>
+                    <li><strong>藍牙傳輸</strong>：指令透過藍牙模組傳送給 Arduino 控制板。</li>
+                    <li><strong>Arduino 解析與執行</strong>：Arduino 控制板解析收到的指令。</li>
+                    <li><strong>馬達驅動</strong>：Arduino 控制馬達驅動模組 (L298N)，進而驅動直流馬達，使車輛做出相應動作。</li>
+                    <li><strong>障礙物偵測 (可選)</strong>：若啟用超聲波感測器，它會持續偵測前方是否有障礙物。如果偵測到，車輛會自動停止，避免碰撞。</li>
+                </ol>
+                <figure>
+                    <img src="placeholder-flowchart.png" alt="自走車流程圖">
+                    <figcaption>(圖1.藍牙控制的Arduino 自走車的詳細流程圖)</figcaption>
+                </figure>
+            </section>
+
+            <section id="challenges-solutions">
+                <h2>挑戰與解決方案：開發過程中的小插曲</h2>
+                <p>在開發過程中，我們也遇到了一些挑戰：</p>
+                <ol>
+                    <li>
+                        <strong>DC馬達電壓不足</strong>：初期使用4串乾電池，電壓不足以穩定驅動DC馬達 (其工作電壓建議在 $3V \sim 8V$ 左右)。
+                        <ul>
+                            <li><strong>解決方法</strong>：將電池增加到6串，滿電狀態下電壓可達9V，足以驅動馬達。</li>
+                        </ul>
+                    </li>
+                    <li>
+                        <strong>伺服馬達/UNO供電不穩</strong>：在使用電池供電時，發現L298N電機驅動板的輸出端（至UNO板）電壓在 $3.5V \sim 5.5V$ 之間跳動，而伺服馬達的工作電壓需要穩定的 $4 \sim 6V$，導致有時無法正常驅動。
+                        <ul>
+                            <li><strong>解決方法</strong>：我們改用了18650鋰電池，並增加了一個LM2596S可調降壓穩壓電源模組，成功解決了輸入電壓不穩定的問題。</li>
+                        </ul>
+                    </li>
+                </ol>
+                <figure>
+                    <img src="placeholder-l298n.png" alt="L298N 電機驅動板">
+                    <figcaption>(圖2.L298N圖片)</figcaption>
+                </figure>
+                <figure>
+                    <img src="placeholder-lm2596s.png" alt="LM2596S 降壓模組">
+                    <figcaption>(圖3.LM2596S圖片)</figcaption>
+                </figure>
+            </section>
+
+            <section id="results">
+                <h2>成果展示：我的自走車動起來了！</h2>
+                <p>經過不斷的調整與測試，自走車終於成功動起來了！</p>
+                <figure>
+                    <img src="placeholder-car.jpg" alt="自走車成品">
+                    <figcaption>(圖4.自走車成品照片)</figcaption>
+                </figure>
+                <p>預期達成的功能包括：</p>
+                <ul>
+                    <li><strong>成功控制車輛運動</strong>：能透過手機App或網頁即時控制車輛前進、後退、轉彎和停止。</li>
+                    <li><strong>穩定的藍牙連接</strong>：確保指令準確傳輸。</li>
+                    <li><strong>障礙物偵測</strong>：遇到障礙物時能自動停止 (若配置超聲波感測器)。</li>
+                    <li><strong>友好的使用者介面</strong>：控制介面簡單易用。</li>
+                </ul>
+            </section>
+
+            <section id="learnings-future">
+                <h2>學習心得與未來展望</h2>
+                <p>完成這個專案後，我對 Arduino、藍牙通訊以及移動控制等技術有了更深入的理解和實作經驗。這個系統的架構也保留了良好的可擴展性，未來還有許多可以進一步研究和添加的功能，例如更複雜的路徑規劃、更智能的自動避障演算法等等。</p>
+            </section>
+
+            <section id="acknowledgements">
+                <h2>感謝</h2>
+                <p>感謝我的組員 沈睿晟、劉旭翔、黃彥瑞 (此處根據 專題期末報告-自走車.pdf 列出，若您的部落格是以個人名義發表，請自行調整) 以及指導老師 許智淵 (根據 期末報告.pdf) 的協助與指導！</p>
+            </section>
+
+            <footer>
+                <p>希望大家喜歡我的專案分享！</p>
+            </footer>
+        </article>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

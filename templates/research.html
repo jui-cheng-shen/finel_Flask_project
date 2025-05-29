@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}研究{% endblock %}
+
+{% block content %}
+
+<h2>研究</h2>
+
+
+<ul class="research-list">
+    <li><a href="{{ url_for('static', filename='research_avoidance_car/index.html') }}" target="_blank">研究1：🚗自走車</a></li>
+    <li><a href="{{ url_for('static', filename='Topological_sort/index.html') }}">研究2:🪜拓撲排序</a></li>
+</ul>
+{% endblock %}

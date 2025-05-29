@@ -102,6 +102,13 @@ ul {
   padding: 0;
 }
 
+.research-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 0;
+}
+
 li {
   list-style: none;
   background: #f8f9fa;
