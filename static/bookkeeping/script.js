@@ -1185,3 +1185,18 @@ function varCss(name) {
 
 // Run initialization when the DOM is fully loaded
 document.addEventListener('DOMContentLoaded', init);
+
+window.addEventListener('beforeunload', function() {
+    // 收集你需要記錄的所有資料，這裡以 localStorage 為例
+    const dataToSave = {
+        users: JSON.parse(localStorage.getItem('users') || '{}'),
+        currentUser: JSON.parse(localStorage.getItem('currentUser') || 'null'),
+        transactions: JSON.parse(localStorage.getItem('transactions') || '[]'),
+        categories: JSON.parse(localStorage.getItem('categories') || '[]'),
+        paymentMethods: JSON.parse(localStorage.getItem('paymentMethods') || '[]'),
+        budgets: JSON.parse(localStorage.getItem('budgets') || '[]')
+    };
+
+    const blob = new Blob([JSON.stringify(dataToSave)], { type: 'application/json' });
+    navigator.sendBeacon('/autosave', blob);
+});

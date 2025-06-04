@@ -1,3 +1,6 @@
+/* ====================
+   網站字型與基本佈局元件 - 字型、背景、主體設定
+   ==================== */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;500;700&family=Poppins:wght@400;600&display=swap');
 
 body {
@@ -11,6 +14,9 @@ body {
   letter-spacing: 0.3px;
 }
 
+/* ===================
+   頁首元件 - header
+   =================== */
 header {
   background: linear-gradient(45deg, #2c3e50, #3498db);
   color: white;
@@ -21,15 +27,18 @@ header {
   z-index: 1000;
 }
 
+/* ===================
+   導覽列元件 - nav 與選單連結
+   =================== */
 nav {
   margin-top: 1rem;
   position: relative;
 }
 
 nav a {
-  margin: 0 1.5rem;
+  margin: 0 1.5rem; /* 調整連結間距 */
   color: rgba(255, 255, 255, 0.9);
-  text-decoration: none;
+  text-decoration: none; /*decoration 作用為去除下劃線*/
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 30px;
@@ -38,19 +47,19 @@ nav a {
 
 nav a:hover {
   background: rgba(255, 255, 255, 0.15);
-  transform: scale(1.05) translateY(-2px);
+  transform: scale(1.05) translateY(-2px); /*transform 作用為放大與上移*/
   color: #fff;
 }
 
 nav a::after {
   content: '';
-  position: absolute;
-  bottom: -5px;
+  position: absolute; /* 位置設定為絕對定位 */
+  bottom: -5px; /* 底部距離 */
   left: 50%;
   width: 0;
   height: 2px;
   background: #fff;
-  transition: all 0.3s;
+  transition: all 0.3s;  /* 過渡效果 */
 }
 
 nav a:hover::after {
@@ -58,6 +67,9 @@ nav a:hover::after {
   left: 15%;
 }
 
+/* ===================
+   主要內容區域元件 - main
+   =================== */
 main {
   flex: 1;
   padding: 2rem;
@@ -81,6 +93,9 @@ main {
   }
 }
 
+/* ===================
+   區塊標題元件 - h2
+   =================== */
 h2 {
   color: #2c3e50;
   border-left: 5px solid #3498db;
@@ -88,6 +103,9 @@ h2 {
   margin: 2rem 0;
 }
 
+/* ===================
+   列表顯示元件 - ul 與 li
+   =================== */
 ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -144,30 +162,44 @@ li a:hover::before {
   transform: translateX(5px);
 }
 
+/* ===================
+   頁尾元件 - footer
+   =================== */
 footer {
-  background-color: #1a2526; /* 深色背景，類似圖片 */
+  background-color: #1a2526;
+  /* 深色背景，類似圖片 */
   color: #ffffff;
-  padding: 1.5rem 0.5rem; /* 縮小內邊距 */
+  padding: 1.5rem 0.5rem;
+  /* 縮小內邊距 */
   font-family: Arial, sans-serif;
 }
 
 .footer-container {
-  display: flex; /* 使用 flexbox */
-  flex-wrap: wrap; /* 允許換行 */
-  justify-content: space-between; /* 欄之間均勻分佈 */
-  max-width: 1000px; /* 縮小最大寬度 */
+  display: flex;
+  /* 使用 flexbox */
+  flex-wrap: wrap;
+  /* 允許換行 */
+  justify-content: space-between;
+  /* 欄之間均勻分佈 */
+  max-width: 1000px;
+  /* 縮小最大寬度 */
   margin: 0 auto;
 }
 
 .footer-column {
-  flex: 1 1 45%; /* 每欄佔據約 45% 寬度，實現兩欄一行 */
-  min-width: 150px; /* 縮小最小寬度 */
-  margin-bottom: 0.8rem; /* 縮小垂直間距 */
+  flex: 1 1 45%;
+  /* 每欄佔據約 45% 寬度，實現兩欄一行 */
+  min-width: 150px;
+  /* 縮小最小寬度 */
+  margin-bottom: 0.8rem;
+  /* 縮小垂直間距 */
 }
 
 .footer-column h3 {
-  font-size: 1rem; /* 縮小標題字體 */
-  margin-bottom: 0.8rem; /* 縮小標題下間距 */
+  font-size: 1rem;
+  /* 縮小標題字體 */
+  margin-bottom: 0.8rem;
+  /* 縮小標題下間距 */
   color: #ffffff;
 }
 
@@ -177,13 +209,17 @@ footer {
 }
 
 .footer-column li {
-  margin-bottom: 0.3rem; /* 縮小列表項間距 */
+  margin-bottom: 0.3rem;
+  /* 縮小列表項間距 */
 }
 
-.footer-column a, .footer-column li {
+.footer-column a,
+.footer-column li {
   color: #b0b0b0;
-  font-size: 0.8rem; /* 縮小文字大小 */
-  line-height: 1.4; /* 縮小行高 */
+  font-size: 0.8rem;
+  /* 縮小文字大小 */
+  line-height: 1.4;
+  /* 縮小行高 */
   text-decoration: none;
 }
 
@@ -191,16 +227,22 @@ footer {
   color: #ffffff;
 }
 
+/* 頁尾底部資訊元件 */
 .footer-bottom {
   text-align: center;
-  margin-top: 1.5rem; /* 縮小上邊距 */
+  margin-top: 1.5rem;
+  /* 縮小上邊距 */
   border-top: 1px solid #333;
-  padding-top: 0.8rem; /* 縮小內邊距 */
-  font-size: 0.7rem; /* 縮小版權文字 */
+  padding-top: 0.8rem;
+  /* 縮小內邊距 */
+  font-size: 0.7rem;
+  /* 縮小版權文字 */
   color: #b0b0b0;
 }
 
-/* 漢堡選單樣式 */
+/* ===================
+   漢堡選單元件 - 小螢幕導覽控制
+   =================== */
 .hamburger {
   display: none;
   position: absolute;
@@ -211,6 +253,9 @@ footer {
   color: white;
 }
 
+/* ===================
+   響應式元件 - 調整小螢幕下的導覽選單與排版
+   =================== */
 @media (max-width: 768px) {
   nav {
     display: none;
@@ -242,6 +287,4 @@ footer {
     margin: 1rem;
     padding: 1.5rem;
   }
-
-
 }
