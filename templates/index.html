@@ -1,8 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %}首頁 - 沈睿晟的個人網站{% endblock %}
+{% block title %}首頁 - Maya Nelson{% endblock %}
 
 {% block content %}
-<h2>歡迎來到我的網站！</h2>
-<p>你好,我是資訊工程系的學生，目前就讀於南台科技大學五專資訊工程系3年級。</p>
+<div class="homepage-container">
+    <div class="profile-card">
+        <img src="{{ url_for('static', filename='images/my_photo.jpg') }}" alt="juicheng headshot" class="profile-pic">
+        <h2 class="name">沈睿晟 juicheng Shen</h2>
+        <div class="separator"></div>
+        <p class="title">information engineering student</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/chen.rui.cheng.157174" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/photography.jcsw/?next=%2Fshen_jui_cheng%2F" class="social-icon"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+    <div class="main-content">
+        <h1 class="greeting">Hello</h1>
+        <h3 class="subheading">Here's who I am & what I do</h3>
+        <div class="buttons">
+            <a href="{{ url_for('about') }}" class="btn btn-primary">ABOUT</a>
+            <a href="{{ url_for('achievements') }}" class="btn btn-secondary">PROJECTS</a>
+        </div>
+        <p class="description-text">
+            你好,我是資訊工程系的學生，目前就讀於南台科技大學五專資訊工程系3年級。
+            我對程式設計和網頁開發充滿熱情，並且喜歡探索新技術和工具。
+            在這個網站上，我將分享我的學習經歷、專案成果以及一些個人興趣。
+        </p>
+        <p class="description-text">
+            我希望透過這個平台與大家分享我的學習旅程，並且與志同道合的人交流。
+            如果你對我的專案或技能有興趣，歡迎隨時聯繫我！
+        </p>
+    </div>
+</div>
 {% endblock %}

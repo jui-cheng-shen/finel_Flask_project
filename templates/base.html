@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <title>{% block title %}我的個人網站{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -31,9 +32,9 @@
         <h3>沈睿晟的網站</h3>
         <p>這裡是沈睿晟的個人網站，分享攝影、成果展示等內容。</p>
         <div class="social-icons">
-          <a href="#"><span>📷</span></a>
-          <a href="#"><span>🐦</span></a>
-          <a href="#"><span>📘</span></a>
+          <a href="{{ url_for('photos') }}"><span>📷</span></a>
+          <a href="{{ url_for('about') }}"><span>ℹ️</span></a>
+          <a href="{{ url_for('contact') }}"><span>📘</span></a>
         </div>
       </div>
     <div class="footer-bottom">
