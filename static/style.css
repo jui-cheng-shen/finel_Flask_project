@@ -94,7 +94,9 @@ main {
   animation: fadeIn 0.5s ease-in;
 }
 
+
 /* Homepage-Specific Main Styles */
+/**/
 main.homepage {
   flex-grow: 1;
   display: flex;
@@ -110,6 +112,7 @@ main.homepage {
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -129,6 +132,15 @@ h2 {
 /* ===================
    List Display Component
    =================== */
+
+ol {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+  padding: 5 0 1.5rem;
+  margin: 0;
+}
+
 ul {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -146,18 +158,30 @@ ul {
 
 li {
   list-style: none;
-  background: #f8f9fa;
+  /* Liquid Glass 效果 */
+  background: rgba(255, 255, 255, 0.15);
+  /* 半透明背景 */
+  backdrop-filter: blur(8px) saturate(180%);
+  /* 磨砂玻璃效果 */
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  /* 輕微的邊框，增加玻璃質感 */
   border-radius: 12px;
   padding: 1.5rem;
-  transition: all 0.3s ease;
+  transition: all 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+  /* 保留原有動畫，並加入 box-shadow 過渡 */
   position: relative;
   overflow: hidden;
+  /* 內部陰影和光澤，模擬玻璃的深度和反射 */
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.1);
 }
 
 li:hover {
   transform: translateY(-5px);
-  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-  box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);
+  /* 懸停時的背景可以稍微調整，增加互動感 */
+  background: rgba(255, 255, 255, 0.25);
+  /* 懸停時稍微更透明 */
+  box-shadow: 0 12px 36px rgba(31, 38, 135, 0.3), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+  /* 懸停時陰影更明顯 */
 }
 
 li a {
@@ -247,7 +271,7 @@ footer {
   flex-wrap: wrap;
   gap: 40px;
   max-width: 1100px;
-  background-color: #ffffff;
+  background-color: #f3eeee7a;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
   padding: 40px;
