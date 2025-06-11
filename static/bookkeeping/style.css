@@ -1,137 +1,138 @@
-/* Basic Resets & Global Styles */
-:root {
-    --primary-color: #4CAF50; /* Green */
-    --secondary-color: #2196F3; /* Blue */
-    --warning-color: #FFC107; /* Amber */
-    --danger-color: #F44336; /* Red */
-    --text-color: #333;
-    --light-text-color: #666;
-    --background-color: #f4f7f6;
-    --surface-color: #ffffff;
-    --border-color: #e0e0e0;
-    --shadow-light: 0 2px 4px rgba(0,0,0,0.08);
-    --shadow-medium: 0 4px 8px rgba(0,0,0,0.1);
-    --border-radius: 8px;
-    --spacing-unit: 1rem;
+/* Basic Resets & Global Styles */ /* 全域樣式與重設 */
+
+/* 定義全域 CSS 變數，便於統一管理配色與間距 */
+:root {  
+    --primary-color: #4CAF50; /* 主色系：綠色 */
+    --secondary-color: #2196F3; /* 次要色系：藍色 */
+    --warning-color: #FFC107; /* 警告色：琥珀色 */
+    --danger-color: #F44336; /* 危險色：紅色 */
+    --text-color: #333; /* 主要文字顏色 */
+    --light-text-color: #666; /* 較淺的文字顏色 */
+    --background-color: #f4f7f6; /* 全站背景色 */
+    --surface-color: #ffffff; /* 卡片/面板等表面背景色 */
+    --border-color: #e0e0e0; /* 邊框顏色 */
+    --shadow-light: 0 2px 4px rgba(0,0,0,0.08); /* 輕微陰影 */
+    --shadow-medium: 0 4px 8px rgba(0,0,0,0.1); /* 中等陰影 */
+    --border-radius: 8px; /* 標準圓角大小 */
+    --spacing-unit: 1rem; /* 標準間距單位 */
 }
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+* {  
+    box-sizing: border-box;  /* 設定所有元素的 box-sizing 為 border-box */
+    margin: 0;  /* 重設所有元素的外距為 0 */
+    padding: 0;  /* 重設所有元素的內距為 0 */
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    line-height: 1.6;
-    color: var(--text-color);
-    background-color: var(--background-color);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
+body {  
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 設定身體文字字型 */
+    line-height: 1.6;  /* 設定行高使文字間距舒適 */
+    color: var(--text-color);  /* 使用預設文字顏色 */
+    background-color: var(--background-color);  /* 使用全站背景色 */
+    min-height: 100vh;  /* 設定最小高度為整個視窗高度 */
+    display: flex;  /* 以彈性容器呈現 */
+    flex-direction: column;  /* 主軸為直向排列 */
 }
 
-.container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 0 auto;
+.container {  
+    width: 90%;  /* 設定容器寬度為視窗 90% */
+    max-width: 1200px;  /* 設定最大寬度 1200px */
+    margin: 0 auto;  /* 自動水平置中 */
 }
 
-.hidden {
-    display: none !important;
+.hidden {  
+    display: none !important;  /* 隱藏元素，且使用 !important 提高權重 */
 }
 
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+.sr-only {  
+    position: absolute;  /* 絕對定位 */
+    width: 1px;  /* 寬度設為 1px */
+    height: 1px;  /* 高度設為 1px */
+    padding: 0;  /* 無內距 */
+    margin: -1px;  /* 負外距，將元素移出畫面 */
+    overflow: hidden;  /* 隱藏多餘內容 */
+    clip: rect(0, 0, 0, 0);  /* 裁剪元素使其不可見 */
+    white-space: nowrap;  /* 防止換行 */
+    border-width: 0;  /* 邊框寬度為 0 */
 }
 
-/* Buttons */
+/* Buttons */  /* 按鈕樣式定義 */
 .btn {
-    display: inline-flex; /* Use flex for alignment with icons */
-    align-items: center;
-    justify-content: center;
-    padding: 0.75rem 1.25rem;
-    border: none;
-    border-radius: var(--border-radius);
-    cursor: pointer;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: background-color 0.2s ease, transform 0.1s ease;
-    text-decoration: none; /* For button-like links */
-    color: white; /* Default text color for buttons */
+    display: inline-flex; /* 使用 inline-flex 使按鈕與圖示垂直置中 */
+    align-items: center; /* 垂直置中按鈕內部內容 */
+    justify-content: center; /* 水平置中按鈕內部內容 */
+    padding: 0.75rem 1.25rem; /* 設定上下左右內距 */
+    border: none; /* 無邊框 */
+    border-radius: var(--border-radius); /* 使用預設圓角 */
+    cursor: pointer; /* 游標變成手型 */
+    font-size: 1rem; /* 設定字體大小 */
+    font-weight: 600; /* 設定字體粗細 */
+    transition: background-color 0.2s ease, transform 0.1s ease; /* 動畫過渡效果 */
+    text-decoration: none; /* 去除文字連結下劃線 */
+    color: white; /* 按鈕文字預設為白色 */
 }
 
-.btn i {
-    margin-right: 0.5rem;
+.btn i {  
+    margin-right: 0.5rem; /* 圖示右邊增加間距 */
 }
 
-.btn-icon-only {
-    width: 40px;
-    height: 40px;
-    padding: 0;
-    border-radius: 50%; /* Make it round */
+.btn-icon-only {  
+    width: 40px;  /* 設定固定寬度 */
+    height: 40px; /* 設定固定高度 */
+    padding: 0; /* 內距為 0 */
+    border-radius: 50%; /* 設定為圓形 */
 }
 
-.btn-icon-only i {
-    margin-right: 0;
+.btn-icon-only i {  
+    margin-right: 0; /* 圓形按鈕內圖示取消右間距 */
 }
-
 
 .btn-primary {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* 主按鈕背景使用主色系 */
 }
 
 .btn-primary:hover {
-    background-color: #43a047; /* Darker green */
-    transform: translateY(-2px);
+    background-color: #43a047; /* 滑鼠懸停時背景顏色換成較深綠色 */
+    transform: translateY(-2px); /* 往上移動2px效果 */
 }
 
 .btn-secondary {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* 次按鈕背景使用次色系 */
 }
 
 .btn-secondary:hover {
-    background-color: #1976d2; /* Darker blue */
-    transform: translateY(-2px);
+    background-color: #1976d2; /* 滑鼠懸停時背景顏色換成較深藍色 */
+    transform: translateY(-2px); /* 往上移動2px效果 */
 }
 
 .btn-warning {
-    background-color: var(--warning-color);
-    color: var(--text-color); /* Adjust text color for warning */
+    background-color: var(--warning-color); /* 警告按鈕背景使用警告色 */
+    color: var(--text-color); /* 調整文字顏色為主要文字色 */
 }
 
 .btn-warning:hover {
-    background-color: #ffb300; /* Darker amber */
-    transform: translateY(-2px);
+    background-color: #ffb300; /* 滑鼠懸停時警告按鈕背景換成較深琥珀色 */
+    transform: translateY(-2px); /* 往上移動2px效果 */
 }
 
 .btn-danger {
-    background-color: var(--danger-color);
+    background-color: var(--danger-color); /* 危險按鈕背景使用危險色 */
 }
 
 .btn-danger:hover {
-    background-color: #d32f2f; /* Darker red */
-    transform: translateY(-2px);
+    background-color: #d32f2f; /* 滑鼠懸停時背景顏色換成較深紅色 */
+    transform: translateY(-2px); /* 往上移動2px效果 */
 }
 
-/* Forms */
+/* Forms */  /* 表單相關樣式 */
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1rem; /* 每個表單群組底部外距 1rem */
 }
 
 .form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-    color: var(--light-text-color);
+    display: block; /* 標籤獨佔一行 */
+    margin-bottom: 0.5rem; /* 標籤與輸入框間距 0.5rem */
+    font-weight: 600; /* 文字加粗 */
+    color: var(--light-text-color); /* 使用較淺文字顏色 */
 }
 
 .form-group input[type="text"],
@@ -139,641 +140,641 @@ body {
 .form-group input[type="password"],
 .form-group input[type="number"],
 .form-group input[type="date"],
-.form-group input[type="month"], /* New for budget month */
+.form-group input[type="month"], /* 新增預算月份輸入 */
 .form-group input[type="url"],
 .form-group select,
 .form-group textarea {
-    width: 100%;
-    padding: 0.8rem;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
-    font-size: 1rem;
-    background-color: var(--surface-color);
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    width: 100%; /* 輸入元件寬度 100% */
+    padding: 0.8rem; /* 內距 0.8rem */
+    border: 1px solid var(--border-color); /* 邊框使用預設邊框顏色 */
+    border-radius: var(--border-radius); /* 使用預設圓角 */
+    font-size: 1rem; /* 字體大小 1rem */
+    background-color: var(--surface-color); /* 元件背景色為表面色 */
+    transition: border-color 0.2s ease, box-shadow 0.2s ease; /* 輸入焦點時動畫效果 */
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: var(--primary-color);
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2);
+    border-color: var(--primary-color); /* 輸入聚焦時邊框變主色 */
+    outline: none; /* 取消預設 outline */
+    box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.2); /* 加入聚焦陰影效果 */
 }
 
 .form-group textarea {
-    resize: vertical;
-    min-height: 80px;
+    resize: vertical; /* 只允許垂直縮放 */
+    min-height: 80px; /* 設定最小高度 80px */
 }
 
 .form-switch-link {
-    margin-top: 1rem;
-    text-align: center;
+    margin-top: 1rem; /* 上方外距 1rem */
+    text-align: center; /* 置中對齊 */
 }
 
 .form-switch-link a {
-    color: var(--secondary-color);
-    text-decoration: none;
+    color: var(--secondary-color); /* 連結文字使用次色 */
+    text-decoration: none; /* 去除下劃線 */
 }
 
 .form-switch-link a:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* 滑鼠懸停時添加下劃線 */
 }
 
 .or-separator {
-    text-align: center;
-    margin: 1rem 0;
-    position: relative;
-    color: var(--light-text-color);
+    text-align: center; /* 文字置中 */
+    margin: 1rem 0; /* 上下外距 1rem */
+    position: relative; /* 相對定位 */
+    color: var(--light-text-color); /* 設定文字顏色 */
 }
 
 .or-separator::before,
 .or-separator::after {
-    content: '';
-    position: absolute;
-    top: 50%;
-    width: 40%;
-    height: 1px;
-    background-color: var(--border-color);
+    content: ''; /* 內容為空 */
+    position: absolute; /* 絕對定位 */
+    top: 50%; /* 垂直置中 */
+    width: 40%; /* 長度 40% 寬度 */
+    height: 1px; /* 高度 1px */
+    background-color: var(--border-color); /* 背景使用邊框顏色 */
 }
 
 .or-separator::before {
-    left: 0;
+    left: 0; /* 左側對齊 */
 }
 
 .or-separator::after {
-    right: 0;
+    right: 0; /* 右側對齊 */
 }
 
 .file-input-label {
-    cursor: pointer;
-    display: inline-block;
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 0.75rem 1.25rem;
-    border-radius: var(--border-radius);
-    transition: background-color 0.2s ease;
+    cursor: pointer; /* 游標變為可點擊形狀 */
+    display: inline-block; /* 以 inline-block 顯示 */
+    background-color: var(--secondary-color); /* 背景色為次色 */
+    color: white; /* 文字顏色為白色 */
+    padding: 0.75rem 1.25rem; /* 內距設定 */
+    border-radius: var(--border-radius); /* 使用圓角 */
+    transition: background-color 0.2s ease; /* 動畫過渡效果 */
 }
 
 .file-input-label:hover {
-    background-color: #1976d2;
+    background-color: #1976d2; /* 滑鼠懸停時背景變深藍 */
 }
 
 .hidden-file-input {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    border: 0;
+    position: absolute; /* 絕對定位 */
+    width: 1px; /* 寬度 1px */
+    height: 1px; /* 高度 1px */
+    padding: 0; /* 無內距 */
+    margin: -1px; /* 負外距，隱藏於畫面外 */
+    overflow: hidden; /* 隱藏內容 */
+    clip: rect(0, 0, 0, 0); /* 裁剪元素 */
+    border: 0; /* 邊框為 0 */
 }
 
 .photo-preview {
-    max-width: 100%;
-    height: auto;
-    max-height: 150px;
-    margin-top: 1rem;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
-    object-fit: contain;
+    max-width: 100%; /* 最大寬度 100% */
+    height: auto; /* 高度自適應 */
+    max-height: 150px; /* 最大高度 150px */
+    margin-top: 1rem; /* 上方外距 1rem */
+    border-radius: var(--border-radius); /* 使用圓角 */
+    border: 1px solid var(--border-color); /* 設定邊框 */
+    object-fit: contain; /* 保持圖片比例 */
 }
 
-/* Header */
+/* Header */  /* 頁首區塊樣式 */
 header {
-    background-color: var(--primary-color);
-    color: white;
-    padding: 1rem 0;
-    box-shadow: var(--shadow-medium);
+    background-color: var(--primary-color); /* 頁首背景使用主色 */
+    color: white; /* 頁首文字為白色 */
+    padding: 1rem 0; /* 上下內距 1rem */
+    box-shadow: var(--shadow-medium); /* 加入中等陰影 */
 }
 
 header .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* 使用彈性布局 */
+    justify-content: space-between; /* 內容左右分散對齊 */
+    align-items: center; /* 垂直置中 */
 }
 
 header h1 {
-    margin: 0;
-    font-size: 1.8rem;
+    margin: 0; /* 清除標題外距 */
+    font-size: 1.8rem; /* 設定標題字體大小 */
 }
 
 header #auth-nav button {
-    margin-left: 0.5rem;
+    margin-left: 0.5rem; /* 按鈕間隔左側外距 0.5rem */
 }
 
-/* Modals */
+/* Modals */  /* 模態視窗相關樣式 */
 .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    position: fixed; /* 固定定位，使模態視窗覆蓋畫面 */
+    top: 0;  /* 從頂部 0 開始 */
+    left: 0; /* 從左側 0 開始 */
+    width: 100%; /* 全寬 */
+    height: 100%; /* 全高 */
+    background-color: rgba(0, 0, 0, 0.6); /* 半透明黑色背景 */
+    display: flex; /* 使用彈性布局 */
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    z-index: 1000; /* 提高 z-index 使其覆蓋其他內容 */
 }
 
 .modal-content {
-    background-color: var(--surface-color);
-    padding: 2rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-medium);
-    width: 90%;
-    max-width: 500px;
-    position: relative;
-    animation: fadeIn 0.3s ease-out;
+    background-color: var(--surface-color); /* 模態視窗內容背景色 */
+    padding: 2rem; /* 內距 2rem */
+    border-radius: var(--border-radius); /* 使用圓角 */
+    box-shadow: var(--shadow-medium); /* 中等陰影 */
+    width: 90%; /* 寬度 90% */
+    max-width: 500px; /* 最大寬度 500px */
+    position: relative; /* 相對定位，便於絕對定位內部元素 */
+    animation: fadeIn 0.3s ease-out; /* 載入時淡入動畫 */
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
+@keyframes fadeIn {  /* 定義名為 fadeIn 的動畫 */
+    from { opacity: 0; transform: translateY(-20px); }  /* 開始時透明並向上偏移 */
+    to { opacity: 1; transform: translateY(0); }  /* 結束時完全不透明且回到原位 */
 }
 
 .modal-content .close-btn {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: var(--light-text-color);
-    line-height: 1; /* Prevent extra spacing */
+    position: absolute; /* 絕對定位 */
+    top: 1rem;  /* 從頂部 1rem */
+    right: 1rem; /* 從右側 1rem */
+    font-size: 1.8rem; /* 字體大小 1.8rem */
+    cursor: pointer; /* 游標為指針 */
+    color: var(--light-text-color); /* 使用較淺文字顏色 */
+    line-height: 1; /* 行高為 1，防止額外間隔 */
 }
 
 .modal-content .close-btn:hover {
-    color: var(--text-color);
+    color: var(--text-color); /* 懸停時文字顏色變為主要文字色 */
 }
 
 .modal-content h2,
-.modal-content h3 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
+.modal-content h3 {  /* 模態視窗內的標題樣式 */
+    text-align: center; /* 置中 */
+    margin-bottom: 1.5rem; /* 底部外距 1.5rem */
+    color: var(--primary-color); /* 文字使用主色 */
 }
 
-/* Main Layout */
+/* Main Layout */  /* 主要內容區域樣式 */
 .main-layout {
-    display: flex;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-    gap: 1.5rem;
-    padding: 1.5rem 0;
-    flex: 1; /* Allows main content to grow */
+    display: flex; /* 使用彈性布局 */
+    flex-wrap: wrap; /* 可換行 */
+    gap: 1.5rem; /* 各項間距 1.5rem */
+    padding: 1.5rem 0; /* 上下邊距 1.5rem */
+    flex: 1; /* 允許主要內容擴展 */
 }
 
 #sidebar {
-    flex: 0 0 250px; /* Fixed width sidebar, won't grow/shrink */
-    background-color: var(--surface-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
-    padding: 1.5rem;
-    height: fit-content; /* Adjust height to content */
-    position: sticky; /* Sticky sidebar */
-    top: 1.5rem; /* Space from top */
+    flex: 0 0 250px; /* 固定 250px 寬的側邊欄，不會伸縮 */
+    background-color: var(--surface-color); /* 側邊欄背景色 */
+    border-radius: var(--border-radius); /* 使用圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
+    padding: 1.5rem; /* 內距 1.5rem */
+    height: fit-content; /* 高度依內容自適應 */
+    position: sticky; /* 設定為 sticky，可隨著滾動黏在螢幕上 */
+    top: 1.5rem; /* 與頂部間隔 1.5rem */
 }
 
 #sidebar h2 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
+    font-size: 1.5rem; /* 側邊欄標題字體大小 */
+    margin-bottom: 1.5rem; /* 底部外距 1.5rem */
+    color: var(--primary-color); /* 文字使用主色 */
 }
 
 #sidebar nav ul {
-    list-style: none;
-    margin-bottom: 1.5rem;
+    list-style: none; /* 清除列表符號 */
+    margin-bottom: 1.5rem; /* 列表底部外距 1.5rem */
 }
 
 #sidebar nav li {
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.75rem; /* 每個列表項底部外距 0.75rem */
 }
 
 #sidebar nav a {
-    display: flex;
-    align-items: center;
-    padding: 0.75rem 1rem;
-    color: var(--text-color);
-    text-decoration: none;
-    border-radius: var(--border-radius);
-    transition: background-color 0.2s ease, color 0.2s ease;
+    display: flex; /* 使用彈性布局排列內部內容 */
+    align-items: center; /* 垂直置中 */
+    padding: 0.75rem 1rem; /* 內距設定 */
+    color: var(--text-color); /* 文字使用預設文字顏色 */
+    text-decoration: none; /* 去除連結下劃線 */
+    border-radius: var(--border-radius); /* 使用圓角 */
+    transition: background-color 0.2s ease, color 0.2s ease; /* 過渡動畫 */
 }
 
 #sidebar nav a i {
-    margin-right: 0.75rem;
-    font-size: 1.1rem;
+    margin-right: 0.75rem; /* 圖示與文字間隔 0.75rem */
+    font-size: 1.1rem; /* 圖示字體大小 */
 }
 
 #sidebar nav a:hover {
-    background-color: var(--background-color);
-    color: var(--primary-color);
+    background-color: var(--background-color); /* 懸停時背景色改為主背景色 */
+    color: var(--primary-color); /* 懸停時文字變為主色 */
 }
 
 #sidebar nav a.active {
-    background-color: var(--primary-color);
-    color: white;
-    font-weight: 600;
+    background-color: var(--primary-color); /* 活躍狀態連結背景為主色 */
+    color: white; /* 活躍狀態文字為白色 */
+    font-weight: 600; /* 活躍狀態字體加粗 */
 }
 
 #sidebar nav a.active:hover {
-    background-color: var(--primary-color); /* Keep active state solid */
-    color: white;
+    background-color: var(--primary-color); /* 活躍狀態懸停時仍維持主色 */
+    color: white; /* 活躍狀態文字保持白色 */
 }
 
 .user-profile {
-    margin-top: 2rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--border-color);
-    font-size: 0.95rem;
-    color: var(--light-text-color);
+    margin-top: 2rem; /* 與上方元素間隔 2rem */
+    padding-top: 1rem; /* 上方內距 1rem */
+    border-top: 1px solid var(--border-color); /* 頂部加上分隔線 */
+    font-size: 0.95rem; /* 文字稍微小一些 */
+    color: var(--light-text-color); /* 文字使用較淺顏色 */
 }
 
 #content-area {
-    flex: 1; /* Content area takes remaining space */
-    min-width: 0; /* Important for flex-items inside a flex container */
+    flex: 1; /* 內容區域佔據剩餘空間 */
+    min-width: 0; /* 允許內容縮小 */
 }
 
 .content-section {
-    background-color: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
-    margin-bottom: 1.5rem; /* Space between sections if multiple are visible */
+    background-color: var(--surface-color); /* 區塊背景為表面色 */
+    padding: 1.5rem; /* 內距 1.5rem */
+    border-radius: var(--border-radius); /* 使用圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
+    margin-bottom: 1.5rem; /* 區塊間下方間距 1.5rem */
 }
 
 .content-section:last-child {
-    margin-bottom: 0;
+    margin-bottom: 0; /* 最後一個區塊底部外距設 0 */
 }
 
 .content-section h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
-    color: var(--primary-color);
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 0.75rem;
+    font-size: 1.8rem; /* 區塊標題字體大小 */
+    margin-bottom: 1.5rem; /* 標題底部外距 1.5rem */
+    color: var(--primary-color); /* 標題文字使用主色 */
+    border-bottom: 1px solid var(--border-color); /* 標題下加底線 */
+    padding-bottom: 0.75rem; /* 底線與文字間距 0.75rem */
 }
 
-/* Dashboard */
+/* Dashboard */  /* 儀表板專區 */
 .dashboard-summaries {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+    display: grid; /* 使用 grid 布局 */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* 自動調整卡片寬度 */
+    gap: 1.5rem; /* 卡片間距 1.5rem */
+    margin-bottom: 2rem; /* 底部外距 2rem */
 }
 
 .summary-card {
-    background-color: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
-    text-align: center;
-    transition: transform 0.2s ease;
+    background-color: var(--surface-color); /* 卡片背景 */
+    padding: 1.5rem; /* 卡片內距 */
+    border-radius: var(--border-radius); /* 卡片圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
+    text-align: center; /* 文字置中 */
+    transition: transform 0.2s ease; /* 移動動畫效果 */
 }
 
 .summary-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-5px); /* 懸停時卡片上移 5px */
 }
 
 .summary-card h4 {
-    font-size: 1.1rem;
-    color: var(--light-text-color);
-    margin-bottom: 0.75rem;
+    font-size: 1.1rem; /* 卡片副標題字體大小 */
+    color: var(--light-text-color); /* 較淺文字顏色 */
+    margin-bottom: 0.75rem; /* 標題下外距 0.75rem */
 }
 
 .summary-card p {
-    font-size: 2rem;
-    font-weight: 700;
-    margin: 0;
+    font-size: 2rem; /* 主要數值字體大小 */
+    font-weight: 700; /* 加粗 */
+    margin: 0; /* 去除內外距 */
 }
 
 .summary-card.income p {
-    color: var(--primary-color);
+    color: var(--primary-color); /* 收入卡片數值文字為主色 */
 }
 
 .summary-card.expense p {
-    color: var(--danger-color);
+    color: var(--danger-color); /* 支出卡片數值文字為危險色 */
 }
 
 .summary-card.balance p {
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* 結餘卡片數值文字使用次色 */
 }
 
 .summary-card.monthly-balance p {
-    color: var(--secondary-color);
+    color: var(--secondary-color); /* 月結餘卡片數值文字使用次色 */
 }
 
 .chart-container {
-    background-color: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
+    background-color: var(--surface-color); /* 圖表容器背景色為表面色 */
+    padding: 1.5rem; /* 內距 1.5rem */
+    border-radius: var(--border-radius); /* 圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
 }
 
 .chart-container h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: var(--primary-color);
+    font-size: 1.5rem; /* 圖表標題字體大小 */
+    margin-bottom: 1rem; /* 標題下外距 1rem */
+    color: var(--primary-color); /* 圖表標題使用主色 */
 }
 
 .chart-placeholder {
-    min-height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--light-text-color);
-    background-color: var(--background-color);
-    border-radius: var(--border-radius);
-    border: 1px dashed var(--border-color);
-    padding: 1rem;
+    min-height: 250px; /* 最低高度 250px */
+    display: flex; /* 使用 flex 置中 */
+    justify-content: center; /* 水平置中 */
+    align-items: center; /* 垂直置中 */
+    color: var(--light-text-color); /* 文字顏色使用較淺色 */
+    background-color: var(--background-color); /* 背景為全站背景色 */
+    border-radius: var(--border-radius); /* 圓角 */
+    border: 1px dashed var(--border-color); /* 使用虛線邊框 */
+    padding: 1rem; /* 內距 1rem */
 }
 
-/* Section Headers */
+/* Section Headers */  /* 各內容區塊標題 */
 .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap; /* Allow wrapping for responsiveness */
-    gap: 1rem; /* Space between items */
+    display: flex; /* 使用 flex 布局 */
+    justify-content: space-between; /* 左右分散排列 */
+    align-items: center; /* 垂直置中 */
+    margin-bottom: 1.5rem; /* 外距 1.5rem */
+    flex-wrap: wrap; /* 允許多行排列 */
+    gap: 1rem; /* 各項之間間隔 1rem */
 }
 
-/* Filters */
+/* Filters */  /* 篩選器區域樣式 */
 .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    background-color: var(--surface-color);
-    padding: 1rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
-    align-items: center;
+    display: flex; /* 使用 flex 布局 */
+    flex-wrap: wrap; /* 允許換行 */
+    gap: 1rem; /* 子元素間隔 1rem */
+    margin-bottom: 1.5rem; /* 底部外距 1.5rem */
+    background-color: var(--surface-color); /* 背景為表面色 */
+    padding: 1rem; /* 內距 1rem */
+    border-radius: var(--border-radius); /* 圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
+    align-items: center; /* 垂直置中 */
 }
 
 .filters select,
 .filters input[type="text"],
 .filters input[type="date"] {
-    flex: 1; /* Allow items to grow */
-    min-width: 150px; /* Minimum width before wrapping */
-    padding: 0.6rem;
-    border-radius: var(--border-radius);
-    border: 1px solid var(--border-color);
+    flex: 1; /* 元素寬度自動擴展 */
+    min-width: 150px; /* 最小寬度為 150px */
+    padding: 0.6rem; /* 內距 0.6rem */
+    border-radius: var(--border-radius); /* 圓角 */
+    border: 1px solid var(--border-color); /* 邊框設定 */
 }
 
 .filters .date-filters {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-    flex-wrap: wrap;
-    flex: 2; /* Date filters take more space */
+    display: flex; /* 使用 flex 布局 */
+    gap: 0.5rem; /* 內部間隔 0.5rem */
+    align-items: center; /* 垂直置中 */
+    flex-wrap: wrap; /* 允許換行 */
+    flex: 2; /* 日期篩選區占用較多空間 */
 }
 
-/* Card Lists */
+/* Card Lists */  /* 卡片列表區塊 */ /*卡片是指每一筆記帳資料的顯示區塊*/
 .card-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    display: flex; /* 使用彈性盒布局 */
+    flex-direction: column; /* 子項目垂直排列 */
+    gap: 1rem; /* 之間間距 1rem */
 }
 
 .card {
-    background-color: var(--surface-color);
-    padding: 1rem 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background-color: var(--surface-color); /* 卡片背景為表面色 */
+    padding: 1rem 1.5rem; /* 卡片內距 */
+    border-radius: var(--border-radius); /* 圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
+    display: flex; /* 使用 flex 布局 */
+    justify-content: space-between; /* 子元素左右排列 */
+    align-items: center; /* 垂直置中 */
+    gap: 1rem; /* 元素間隔 1rem */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* 動畫過渡 */
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-medium);
+    transform: translateY(-3px); /* 滑鼠懸停時卡片上移 3px */
+    box-shadow: var(--shadow-medium); /* 阻尼陰影變中等 */
 }
 
 .card-info {
-    flex: 1; /* Takes up most space */
+    flex: 1; /* 卡片資訊區佔據大部分空間 */
 }
 
 .card-info h4 {
-    font-size: 1.1rem;
-    margin-bottom: 0.3rem;
-    color: var(--text-color);
+    font-size: 1.1rem; /* 卡片副標題字體大小 */
+    margin-bottom: 0.3rem; /* 底部外距 0.3rem */
+    color: var(--text-color); /* 使用主要文字顏色 */
 }
 
 .card-info p {
-    font-size: 0.9rem;
-    color: var(--light-text-color);
-    margin-bottom: 0.2rem;
+    font-size: 0.9rem; /* 卡片內容文字大小 */
+    color: var(--light-text-color); /* 使用較淺文字顏色 */
+    margin-bottom: 0.2rem; /* 底部外距 0.2rem */
 }
 
 .card-info .note {
-    font-style: italic;
-    font-size: 0.85rem;
-    color: #777;
+    font-style: italic; /* 斜體 */
+    font-size: 0.85rem; /* 字體較小 */
+    color: #777; /* 灰色 */
 }
 
 .card-info .photo-link {
-    display: inline-flex;
-    align-items: center;
-    font-size: 0.85rem;
-    color: var(--secondary-color);
-    text-decoration: none;
-    margin-top: 0.5rem;
+    display: inline-flex; /* 內聯彈性布局 */
+    align-items: center; /* 垂直置中 */
+    font-size: 0.85rem; /* 字體小一點 */
+    color: var(--secondary-color); /* 使用次色 */
+    text-decoration: none; /* 無下劃線 */
+    margin-top: 0.5rem; /* 上方間距 0.5rem */
 }
 
 .card-info .photo-link i {
-    margin-right: 0.3rem;
+    margin-right: 0.3rem; /* 圖示右側間距 0.3rem */
 }
 
 .card-info .photo-link:hover {
-    text-decoration: underline;
+    text-decoration: underline; /* 懸停時添加下劃線 */
 }
 
 .amount {
-    font-size: 1.5rem;
-    font-weight: 700;
-    white-space: nowrap; /* Prevent wrapping */
+    font-size: 1.5rem; /* 數值字型較大 */
+    font-weight: 700; /* 加粗 */
+    white-space: nowrap; /* 防止文字換行 */
 }
 
 .amount.income {
-    color: var(--primary-color);
+    color: var(--primary-color); /* 收入數值文字使用主色 */
 }
 
 .amount.expense {
-    color: var(--danger-color);
+    color: var(--danger-color); /* 支出數值文字使用危險色 */
 }
 
 .card-actions {
-    display: flex;
-    gap: 0.5rem;
-    flex-shrink: 0; /* Prevent actions from shrinking */
+    display: flex; /* 使用 flex 布局 */
+    gap: 0.5rem; /* 元素間距 0.5rem */
+    flex-shrink: 0; /* 防止子元素收縮 */
 }
 
-/* List placeholders */
+/* List placeholders */  /* 清單空狀態樣式 */
 .list-placeholder {
-    text-align: center;
-    color: var(--light-text-color);
-    padding: 2rem;
-    background-color: var(--surface-color);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
+    text-align: center; /* 文字置中 */
+    color: var(--light-text-color); /* 使用較淺文字顏色 */
+    padding: 2rem; /* 間距 2rem */
+    background-color: var(--surface-color); /* 背景色為表面色 */
+    border-radius: var(--border-radius); /* 圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
 }
 
-/* Budget specific styles */
+/* Budget specific styles */  /* 預算卡片相關樣式 */ /* 預算卡片是指顯示區塊*/
 .budget-card {
-    background-color: var(--surface-color);
-    padding: 1.5rem;
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow-light);
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    position: relative;
+    background-color: var(--surface-color); /* 預算卡背景為表面色 */
+    padding: 1.5rem; /* 內距 1.5rem */
+    border-radius: var(--border-radius); /* 圓角 */
+    box-shadow: var(--shadow-light); /* 輕微陰影 */
+    display: flex; /* 使用 flex 布局 */
+    flex-direction: column; /* 垂直排列 */
+    gap: 0.75rem; /* 子元素間距 0.75rem */
+    position: relative; /* 相對定位 */
 }
 
 .budget-card .budget-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: flex; /* 使用 flex 布局 */
+    justify-content: space-between; /* 左右排列 */
+    align-items: center; /* 垂直置中 */
 }
 
 .budget-card .budget-header h4 {
-    margin: 0;
-    font-size: 1.2rem;
-    color: var(--primary-color);
+    margin: 0; /* 去除外距 */
+    font-size: 1.2rem; /* 標題字體大小 */
+    color: var(--primary-color); /* 使用主色 */
 }
 
 .budget-card .budget-progress-bar {
-    width: 100%;
-    height: 10px;
-    background-color: var(--background-color);
-    border-radius: 5px;
-    overflow: hidden;
-    margin-top: 0.5rem;
+    width: 100%; /* 進度條寬度 100% */
+    height: 10px; /* 高度 10px */
+    background-color: var(--background-color); /* 背景色為背景色 */
+    border-radius: 5px; /* 進度條圓角 5px */
+    overflow: hidden; /* 超出部分隱藏 */
+    margin-top: 0.5rem; /* 上方外距 0.5rem */
 }
 
 .budget-card .budget-progress {
-    height: 100%;
-    background-color: var(--secondary-color); /* Default progress color */
-    border-radius: 5px;
-    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out;
+    height: 100%; /* 進度寬度充滿父容器 */
+    background-color: var(--secondary-color); /* 進度條預設為次色 */
+    border-radius: 5px; /* 同樣圓角 5px */
+    transition: width 0.3s ease-in-out, background-color 0.3s ease-in-out; /* 寬度與背景色動畫過渡 */
 }
 
 .budget-card .budget-progress.over-budget {
-    background-color: var(--danger-color); /* Red for over budget */
+    background-color: var(--danger-color); /* 預算超支時進度條變紅 */
 }
 
 .budget-card .budget-details {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.9rem;
-    color: var(--light-text-color);
+    display: flex; /* 使用 flex 布局 */
+    justify-content: space-between; /* 左右分散對齊 */
+    font-size: 0.9rem; /* 文本字體稍小 */
+    color: var(--light-text-color); /* 使用較淺文字色 */
 }
 
 .budget-card .budget-status {
-    font-weight: 600;
+    font-weight: 600; /* 加粗文字 */
 }
 
 .budget-card .card-actions {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    gap: 0.3rem; /* Smaller gap for budget card actions */
+    position: absolute; /* 絕對定位 */
+    top: 1rem; /* 從頂部 1rem */
+    right: 1rem; /* 從右側 1rem */
+    gap: 0.3rem; /* 子元素間隔 0.3rem */
 }
 
-/* Responsive adjustments */
-@media (max-width: 992px) {
+/* Responsive adjustments */  /* 響應式調整 */
+@media (max-width: 992px) {  /* 螢幕寬度低於 992px */
     .main-layout {
-        flex-direction: column;
-        gap: 1rem;
+        flex-direction: column; /* 主要內容由橫向排列改成縱向排列 */
+        gap: 1rem; /* 子項目間距縮小至 1rem */
     }
 
     #sidebar {
-        width: 100%;
-        flex: auto;
-        position: static; /* Remove sticky on small screens */
-        top: auto;
-        padding: 1rem;
+        width: 100%; /* 側邊欄100%寬度 */
+        flex: auto; /* 側邊欄隨內容調整 */
+        position: static; /* 取消 sticky */
+        top: auto; /* 邊距自動 */
+        padding: 1rem; /* 內距縮小 */
     }
 
     #sidebar h2 {
-        text-align: center;
-        margin-bottom: 1rem;
+        text-align: center; /* 標題置中 */
+        margin-bottom: 1rem; /* 下外距 1rem */
     }
 
     #sidebar nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 0.5rem;
+        display: flex; /* 使用 flex 布局 */
+        flex-wrap: wrap; /* 允許換行 */
+        justify-content: center; /* 水平置中 */
+        gap: 0.5rem; /* 子項目間隙 0.5rem */
     }
 
     #sidebar nav li {
-        margin-bottom: 0;
+        margin-bottom: 0; /* 去除列表項外距 */
     }
 
     #sidebar nav a {
-        padding: 0.5rem 0.8rem;
-        font-size: 0.95rem;
+        padding: 0.5rem 0.8rem; /* 連結內距縮小 */
+        font-size: 0.95rem; /* 字體縮小 */
     }
 
     #sidebar nav a i {
-        margin-right: 0.5rem;
+        margin-right: 0.5rem; /* 圖示與文字間隔縮小 */
     }
 
     .user-profile {
-        text-align: center;
-        margin-top: 1rem;
-        padding-top: 0.75rem;
+        text-align: center; /* 置中 */
+        margin-top: 1rem; /* 上外距 1rem */
+        padding-top: 0.75rem; /* 上內距 0.75rem */
     }
 
     .filters {
-        flex-direction: column;
-        align-items: stretch;
+        flex-direction: column; /* 篩選項目垂直排列 */
+        align-items: stretch; /* 使所有子項目拉伸至容器寬度 */
     }
 
     .filters select,
     .filters input {
-        width: 100%;
+        width: 100%; /* 每個篩選器寬度 100% */
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 768px) {  /* 螢幕寬度低於 768px */
     header .container {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: column; /* 頁首容器垂直排列 */
+        text-align: center; /* 置中對齊 */
     }
 
     header #auth-nav {
-        margin-top: 1rem;
+        margin-top: 1rem; /* 上外距 1rem */
     }
 
     .dashboard-summaries {
-        grid-template-columns: 1fr; /* Stack summary cards */
+        grid-template-columns: 1fr; /* 儀表板卡片單欄排列 */
     }
 
     .modal-content {
-        padding: 1.5rem;
+        padding: 1.5rem; /* 模態視窗內距調整 */
     }
 
     .modal-content h2,
     .modal-content h3 {
-        margin-bottom: 1rem;
+        margin-bottom: 1rem; /* 模態視窗標題下外距調整 */
     }
 
     .card {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column; /* 卡片由水平改為縱向排列 */
+        align-items: flex-start; /* 內容左對齊 */
     }
 
     .card-actions {
-        width: 100%;
-        justify-content: flex-end;
-        margin-top: 1rem;
+        width: 100%; /* 分隔操作區域全寬顯示 */
+        justify-content: flex-end; /* 操作按鈕靠右排列 */
+        margin-top: 1rem; /* 上方間距 1rem */
     }
     .amount {
-        margin-top: 0.5rem;
-        align-self: flex-end; /* Align amount to the right in column layout */
+        margin-top: 0.5rem; /* 交易金額上外距 0.5rem */
+        align-self: flex-end; /* 金額在豎排狀態置於右側 */
     }
 }

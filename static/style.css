@@ -137,7 +137,7 @@ li {
   overflow: hidden;
 }
 
-li:hover {
+li:hover { /* 鼠標懸停效果 */
   transform: translateY(-5px);
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   box-shadow: 0 8px 20px rgba(52, 152, 219, 0.25);

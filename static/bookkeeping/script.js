@@ -137,7 +137,7 @@ function formatDate(dateString) {
 }
 
 // 格式化日期字串（顯示月份）
-function formatMonth(dateString) {
+function formatMonth(dateString) { // dataString 應為 YYYY-MM-DD 格式
     const date = new Date(dateString);
     return date.toLocaleDateString('zh-TW', { 
         year: 'numeric', 
@@ -146,14 +146,16 @@ function formatMonth(dateString) {
 }
 
 // 顯示彈窗，並加入輔助無障礙設定
+//無障礙設定的作用是讓使用輔助技術的使用者（如螢幕閱讀器）能夠正確理解彈窗的內容和功能。
 function showModal(modalElement) {
-    modalElement.classList.remove('hidden');
-    modalElement.setAttribute('aria-modal', 'true');
-    modalElement.setAttribute('role', 'dialog');
+    modalElement.classList.remove('hidden'); // 顯示彈窗
+    modalElement.setAttribute('aria-modal', 'true'); // 設定無障礙屬性
+    modalElement.setAttribute('role', 'dialog'); // 設定角色為對話框
     document.body.classList.add('modal-open'); // 開啟彈窗時避免背景滾動
 }
 
 // 隱藏彈窗並移除無障礙屬性
+//移除無障礙屬性是為了讓螢幕閱讀器不再將該元素視為對話框，並恢復背景滾動。
 function hideModal(modalElement) {
     modalElement.classList.add('hidden');
     modalElement.removeAttribute('aria-modal');
@@ -162,41 +164,41 @@ function hideModal(modalElement) {
 }
 
 // 清空表單內容（包括隱藏 ID 欄位、清除圖片預覽）
-function clearForm(formElement) {
-    formElement.reset();
+function clearForm(formElement) { // formElement 是剛開始傳入的表單元素
+    formElement.reset(); // 重置表單內容
     const hiddenInput = formElement.querySelector('input[type="hidden"]');
     if (hiddenInput) {
         hiddenInput.value = '';
     }
     if (formElement.id === 'transaction-form') {
         photoPreview.classList.add('hidden');
-        photoPreview.src = '#';
+        photoPreview.src = '#'; // 清除圖片預覽
     }
 }
 
 // 顯示指定的內容區塊，並更新側邊導航的選取狀態
 function showSection(sectionId) {
-    contentSections.forEach(section => {
-        section.classList.add('hidden');
+    contentSections.forEach(section => { //=> 的意思是箭頭函式，這裡用來遍歷所有內容區塊
+        section.classList.add('hidden'); // 隱藏所有內容區塊
     });
-    document.getElementById(sectionId).classList.remove('hidden');
+    document.getElementById(sectionId).classList.remove('hidden'); // 顯示指定的內容區塊
 
     navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.dataset.section === sectionId.replace('-section', '')) {
+        link.classList.remove('active'); // 移除所有導航連結的 active 類別
+        if (link.dataset.section === sectionId.replace('-section', '')) { // 檢查連結的 data-section 屬性是否與 sectionId 相符
             link.classList.add('active');
         }
     });
 
     // 根據不同的區塊執行對應的重新渲染函式
-    if (sectionId === 'dashboard-section') {
-        renderDashboard();
-    } else if (sectionId === 'transactions-section') {
-        renderTransactions();
-        populateTransactionForms();
-        populateTransactionFilters();
+    if (sectionId === 'dashboard-section') { // 如果是儀表板區塊
+        renderDashboard(); // 渲染儀表板
+    } else if (sectionId === 'transactions-section') { // 如果是交易紀錄區塊
+        renderTransactions(); // 渲染交易清單
+        populateTransactionForms(); // 填充交易表單的選項
+        populateTransactionFilters(); // 填充交易篩選器的選項
     } else if (sectionId === 'categories-section') {
-        renderCategories();
+        renderCategories(); // 渲染分類清單 , 渲染的意思是
     } else if (sectionId === 'payment-methods-section') {
         renderPaymentMethods();
     } else if (sectionId === 'budget-section') {
@@ -213,8 +215,8 @@ function login(email, password) {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         updateAuthUI();
         showSection('dashboard-section');
-        userEmailDisplay.textContent = currentUser.email;
-        console.log('Login successful');
+        userEmailDisplay.textContent = currentUser.email; // 顯示使用者電子郵件
+        console.log('Login successful'); // 登入成功後，顯示儀表板
         return true;
     }
     console.log('Login failed');
@@ -489,7 +491,7 @@ function renderCategories() {
 
 // 渲染付款方式列表
 function renderPaymentMethods() {
-    paymentMethodsList.innerHTML = '';
+    paymentMethodsList.innerHTML = ''; // 清空付款方式列表
     const userPaymentMethods = paymentMethods.filter(pm => pm.userId === currentUser.email);
     if (userPaymentMethods.length === 0) {
         paymentMethodsList.innerHTML = '<p class="list-placeholder">尚未設定任何付款方式。</p>';
@@ -782,19 +784,19 @@ function deleteCategory(id) {
 
 // --- Payment Methods CRUD Operations ---
 // 新增或更新付款方式
-function addOrUpdatePaymentMethod(event) {
-    event.preventDefault();
+function addOrUpdatePaymentMethod(event) { // event 是事件物件，包含觸發事件的相關資訊
+    event.preventDefault(); //preventDefault() 方法用來阻止表單的預設提交行為，避免頁面重整。
     const id = paymentMethodIdInput.value;
     const name = paymentMethodNameInput.value.trim();
-    const balance = parseFloat(paymentMethodBalanceInput.value);
-    if (!name || isNaN(balance)) {
+    const balance = parseFloat(paymentMethodBalanceInput.value); // 取得餘額並轉成數字
+    if (!name || isNaN(balance)) { // 檢查名稱是否為空或餘額是否為有效數字
         alert('請填寫所有必填欄位並確保餘額是有效數字。');
         return;
     }
     if (id) {
         const index = paymentMethods.findIndex(pm => pm.id === id && pm.userId === currentUser.email);
-        if (index !== -1) {
-            paymentMethods[index] = { id, userId: currentUser.email, name, balance };
+        if (index !== -1) { // 如果已存在此付款方式，則更新其資料
+            paymentMethods[index] = { id, userId: currentUser.email, name, balance }; // 這裡的 userId 是用來確保每個付款方式都屬於當前使用者
         }
     } else {
         const newPaymentMethod = { id: generateUniqueId(), userId: currentUser.email, name, balance };
@@ -888,9 +890,9 @@ function editBudget(id) {
 // 刪除預算
 function deleteBudget(id) {
     if (!confirm('確定要刪除此預算設定嗎？')) return;
-    budgets = budgets.filter(b => !(b.id === id && b.userId === currentUser.email));
-    saveBudgets();
-    renderBudgets();
+    budgets = budgets.filter(b => !(b.id === id && b.userId === currentUser.email)); // budgets.filter() 方法用來過濾出不符合條件的預算項目，並返回一個新的陣列。
+    saveBudgets(); // 將更新後的預算資料儲存到本地存儲
+    renderBudgets(); // 重新渲染預算列表
 }
 
 // --- Populate Selects ---
@@ -1028,10 +1030,11 @@ addTransactionBtn.addEventListener('click', () => {
     populateTransactionForms();
     showModal(transactionFormModal);
 });
-transactionForm.addEventListener('submit', addOrUpdateTransaction);
-transactionTypeInput.addEventListener('change', populateTransactionForms);
+transactionForm.addEventListener('submit', addOrUpdateTransaction); // transactionForm 提交事件
+transactionTypeInput.addEventListener('change', populateTransactionForms); // transactionTypeInput 變更事件
+// 交易照片上傳事件：讀取檔案並顯示預覽
 transactionPhotoFileInput.addEventListener('change', (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files[0]; // 取得選擇的檔案
     if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
@@ -1104,9 +1107,11 @@ function init() {
 }
 // 取得 CSS 變數的輔助函式
 function varCss(name) {
-    return getComputedStyle(document.documentElement).getPropertyValue(`--${name}`).trim();
+    return getComputedStyle(document.documentElement).getPropertyValue(`--${name}`).trim(); // 這行的功能是
 }
 // 當 DOM 完全載入後執行初始化
+// DOMContentLoaded 事件會在 HTML 完全載入並解析完成後觸發
+// 這樣可以確保所有元素都已經存在於 DOM 中，避免在腳本中操作尚未載入的元素
 document.addEventListener('DOMContentLoaded', init);
 
 // --- Auto-save on Page Unload ---

@@ -58,6 +58,7 @@ def save_transactions(data):
 @app.route('/autosave', methods=['POST'])
 def autosave():
     data = request.get_json()
+    print(f"接收到自動儲存資料：{data}")
     if not data:
         return jsonify({"status": "failed", "message": "沒有接收到資料"}), 400
     save_transactions(data)
@@ -110,6 +111,26 @@ def photos():
 @app.route('/research')
 def research():
     return render_template('research.html')
+
+@app.route('/get_transactions', methods=['GET'])
+def get_transactions():
+    if not os.path.exists(EXCEL_FILE):
+        return jsonify({"status": "failed", "transactions": []})
+    
+    wb = load_workbook(EXCEL_FILE)
+    all_transactions = []
+    for sheet_name in wb.sheetnames:
+        ws = wb[sheet_name]
+        # 略過標題列，從第二列開始
+        for row in ws.iter_rows(min_row=2, values_only=True):
+            transaction = {
+                "date": row[0],
+                "category": row[1],
+                "paymentMethod": row[2],
+                "amount": row[3]
+            }
+            all_transactions.append(transaction)
+    return jsonify({"status": "success", "transactions": all_transactions})
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=10000)
