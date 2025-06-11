@@ -42,11 +42,18 @@ nav a {
   font-weight: 500;
   padding: 0.5rem 1rem;
   border-radius: 30px;
-  transition: all 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  background: transparent; /* 正常狀態不套用液態玻璃效果 */
+  transition: background 0.3s ease, transform 0.3s ease, color 0.3s ease;
+  position: relative;
 }
 
 nav a:hover {
-  background: rgba(255, 255, 255, 0.15);
+  /* 當滑鼠懸停時才應用液態玻璃效果 */
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
   transform: scale(1.05) translateY(-2px);
   color: #fff;
 }
