@@ -1,144 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
+
 <head>
-    <meta charset="UTF-8">
-    <title>homework</title>
+    <meta charset="UTF-8" />
+    <title>九九乘法表產生器</title>
     <style>
-        /* --- CSS Variables (Custom Properties) --- */
         :root {
-            --primary-bg-color: antiquewhite;
-            --default-font-family: Arial, Helvetica, sans-serif;
-            --border-color: black;
-            --container-padding: 30px;
-            --cell-padding: 5px;
-            --h1-font-size: 30px;
-            --label-font-size: 20px;
-            --input-spacing: 10px; /* For spacing around form elements */
+            --bg-color: #f0f8ff;
+            --card-bg: #ffffff;
+            --primary-color: #3b82f6;
+            --border-radius: 12px;
+            --font-family: "Segoe UI", Arial, sans-serif;
+            --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* --- General Body Styles --- */
         body {
-            font-family: var(--default-font-family);
-            /* Setting box-sizing globally is often a good practice */
-            /* box-sizing: border-box; */ /* Uncomment if you want this for all elements */
+            background-color: var(--bg-color);
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
         }
 
-        /* --- Main Container (#myid) --- */
-        #myid {
-            width: 50%;
-            background-color: var(--primary-bg-color);
-            padding: var(--container-padding); /* 內邊距 (Padding) */
-            margin-left: 0; /* Keeps the container aligned to the left */
-            text-align: center; /* Centers inline/inline-block children (like the table) */
-            box-sizing: border-box; /* Padding and border are included in the element's total width and height */
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background-color: var(--card-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
         }
 
-        /* --- Typography --- */
         h1 {
-            font-size: var(--h1-font-size);
-            font-weight: bold;
-            /* font-family is inherited from body or #myid */
-            text-align: left; /* Overrides #myid's text-align: center */
-            margin-top: 0; /* Removes default browser top margin */
-            margin-bottom: 0.67em; /* Default browser margin for h1, adjust as needed */
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 20px;
         }
 
         label {
-            font-size: var(--label-font-size);
-            /* font-family is inherited */
-            display: inline-block; /* Allows for margin */
-            margin-bottom: var(--input-spacing); /* Space below the label */
+            font-size: 1.2rem;
+            margin-bottom: 10px;
         }
 
-        /* --- Table Styles --- */
-        table {
-            width: 100%; /* Makes the table fill the width of #myid */
-            border: 1px solid var(--border-color); /* Single border around the table */
-            border-collapse: collapse; /* Merges adjacent cell borders */
-            margin: 20px auto 0; /* Adds top margin and centers the table block within #myid */
-            table-layout: fixed; /* Cells have fixed width, content doesn't change it */
-            text-align: center; /* Centers text within table cells */
-        }
-
-        td {
-            border: 1px solid var(--border-color); /* Border for each cell */
-            padding: var(--cell-padding); /* Space between cell content and cell border */
-        }
-
-        /* --- Optional: Basic Form Element Styling --- */
-        #numberInput, button {
-            padding: 8px;
-            font-size: 1em; /* Relative to parent font size */
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1rem;
+            width: 200px;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-right: 5px; /* Spacing between input and button if they are inline */
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
         }
 
         button {
-            background-color: #f0f0f0; /* A light grey, less jarring than default */
+            padding: 10px 16px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 6px;
             cursor: pointer;
+            background-color: var(--primary-color);
+            color: white;
+            transition: background-color 0.3s;
         }
 
         button:hover {
-            background-color: #e0e0e0;
+            background-color: #2563eb;
         }
 
+        #tableOutput {
+            margin-top: 20px;
+            overflow-x: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
     </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>九九乘法表產生器</h1>
+        <div class="form-group">
+            <label for="numberInput">輸入一個正整數：</label>
+            <input type="number" id="numberInput" min="1" />
+            <div class="btn-group">
+                <button onclick="generateTable()">產生乘法表</button>
+                <button onclick="clearTable()">回上一步</button>
+            </div>
+        </div>
+        <div id="tableOutput"></div>
+    </div>
+
     <script>
-        function myFunction() {
-            var number = document.getElementById("numberInput");
-            var myid = document.getElementById("myid");
-            var n = parseInt(number.value);
-            var str = "";
+        function generateTable() {
+            const n = parseInt(document.getElementById("numberInput").value);
+            const output = document.getElementById("tableOutput");
 
             if (isNaN(n) || n <= 0) {
-                myid.innerHTML = "<h1></h1><label for='numberInput'></label>請輸入正整數！"; // Clear previous table
-                // To re-render the input field and button, you'd need to store their HTML or recreate them.
-                // For simplicity, this message will replace the whole content of #myid.
-                // A better UX might be to show the message in a separate element.
+                output.innerHTML = `<p class="error">請輸入正整數！</p>`;
                 return;
             }
 
-            // Reconstruct the input and button if they were part of #myid's innerHTML that gets replaced
-            // Or, better, have a dedicated <div> inside #myid for the table output.
-            // For this example, assuming the error message is temporary and replaces table.
-            // If you want to keep input/button, you need to ensure they are not overwritten
-            // or are re-added. The simplest is to have a dedicated output div for the table.
-
-            // Let's assume you have a structure like:
-            // <div id="myid">
-            //   <h1>九九乘法表</h1>
-            //   <label for="numberInput">輸入一個正整數:</label>
-            //   <input type="number" id="numberInput">
-            //   <button onclick="myFunction()">產生乘法表</button>
-            //   <div id="tableOutput"></div> // </div>
-            // Then you would do: document.getElementById("tableOutput").innerHTML = str;
-            // And error: document.getElementById("tableOutput").innerHTML = "請輸入正整數！";
-
-            str += "<table>";
-            for (var i = 1; i <= n; i++) {
-                str += "<tr>";
-                for (var j = 1; j <= n; j++) {
-                    str += "<td>" + i + " &times; " + j + " = " + (i * j) + "</td>";
+            let tableHTML = "<table>";
+            for (let i = 1; i <= n; i++) {
+                tableHTML += "<tr>";
+                for (let j = 1; j <= n; j++) {
+                    tableHTML += `<td>${i} × ${j} = ${i * j}</td>`;
                 }
-                str += "</tr>";
+                tableHTML += "</tr>";
             }
-            str += "</table>";
+            tableHTML += "</table>";
+            output.innerHTML = tableHTML;
+        }
 
-            myid.innerHTML = document.querySelector('h1').outerHTML + document.querySelector('label').outerHTML + document.getElementById('numberInput').outerHTML + document.querySelector('button').outerHTML + str;
-            // The above line is a quick fix to keep the form elements.
-            // A better approach is to have a separate container for the table output.
-            // e.g., a <div id="outputTable"></div> and then use:
-            // document.getElementById("outputTable").innerHTML = str;
+        function clearTable() {
+            document.getElementById("numberInput").value = "";
+            document.getElementById("tableOutput").innerHTML = "";
         }
     </script>
-</head>
-<body>
-    <div id="myid">
-        <h1>九九乘法表</h1>
-        <label for="numberInput">輸入一個正整數:</label>
-        <input type="number" id="numberInput" name="numberInput">
-        <button onclick="myFunction()">產生乘法表</button>
-        </div>
 </body>
+
 </html>
